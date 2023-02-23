@@ -33,8 +33,8 @@ class ShowText(SampleBase):
             # DrawText(Canvas, Font, x, y, color, text);
             len = graphics.DrawText(offscreen_canvas, font, pos, 10, textColor, my_text)
             print(len)
-            time.sleep(5)
             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+            time.sleep(5)
 
 
 
