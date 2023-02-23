@@ -11,11 +11,11 @@ class ShowText(SampleBase):
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
-        font.LoadFont("fonts/7x13.bdf")
+        font.LoadFont("fonts/4x6.bdf")
         textColor = graphics.Color(255, 255, 0)
         my_text = self.args.text
-        x = 50
-        y = 80
+        x = 10
+        y = 15
 
         words_list = ['apple', 
                       'banana',
