@@ -14,8 +14,8 @@ class ShowText(SampleBase):
         font.LoadFont("fonts/4x6.bdf")
         textColor = graphics.Color(255, 255, 0)
         my_text = self.args.text
-        x = 10
-        y = 15
+        x = 0
+        y = 0
 
         words_list = ['apple', 
                       'banana',
@@ -36,8 +36,8 @@ class ShowText(SampleBase):
             print(len)
             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
             time.sleep(5)
-            x += 10
-            y += 10
+            x += 5
+            y += 5
 
 
 
