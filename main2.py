@@ -19,13 +19,10 @@ options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 matrix = RGBMatrix(options = options)
 
-image_file = Image.open("1.jpg")
+image_file = "1.jpg"
 image = Image.open(image_file)
 image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
 matrix.SetImage(image.convert('RGB'))
-
-
-
 
 
     
