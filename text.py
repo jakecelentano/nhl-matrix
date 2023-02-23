@@ -15,7 +15,7 @@ class ShowText(SampleBase):
         textColor = graphics.Color(255, 255, 0)
         my_text = self.args.text
         x = 0
-        y = 0
+        y = 4
 
         words_list = ['apple', 
                       'banana',
@@ -29,6 +29,7 @@ class ShowText(SampleBase):
                       'blackberry']
         
         for word in words_list:
+            print(x, y)
             my_text = word
             offscreen_canvas.Clear()
             # DrawText(Canvas, Font, x, y, color, text);
@@ -37,7 +38,7 @@ class ShowText(SampleBase):
             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
             time.sleep(5)
             x += 5
-            y += 5
+            #y += 5
 
 
 
