@@ -24,5 +24,11 @@ image = Image.open(image_file)
 image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
 matrix.SetImage(image.convert('RGB'))
 
+try:
+    print("Press CTRL-C to stop.")
+    while True:
+        time.sleep(100)
+except KeyboardInterrupt:
+    sys.exit(0)
 
     
