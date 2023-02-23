@@ -1,9 +1,10 @@
 import requests
 from player import Player
 from game import Game
-from setup import STATS_API_PREFIX
+from setup import STATS_API_PREFIX, LOGO_API_PREFIX
 import datetime
 import cairosvg
+import os
 
 class Team(object):
     def __init__(self, team_id, team_name, team_abbreviation, team_link):
@@ -56,12 +57,19 @@ class Team(object):
         return games[:num_games]
 
     def get_logo(self):
-        #https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/[TEAMID].svg
+        # check if logo already exists
+        
+        if os.path.isfile('logos/{}.png'.format(self.team_name)):
+            return 'logos/{}.png'.format(self.team_name)
+        else:
+            url = LOGO_API_PREFIX + '/{}.svg'.format(self.team_id)
+            try:
+                cairosvg.svg2png(url=url, write_to='logos/{}.png'.format(self.team_name), output_width=100, output_height=100)
+            except:
+                print("Couldn't get logo for {}".format(self.team_name))
+                return 'logos/{}.png'.format('nhl')
+                
 
-        input_svg_path = 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{}.svg'.format(self.team_id)
-        response = requests.get(input_svg_path)
-        print(response)
-        cairosvg.svg2png(url=input_svg_path, write_to='logos/{}.png'.format(self.team_name), output_width=100, output_height=100)
         return 'logos/{}.png'.format(self.team_name)
 
 

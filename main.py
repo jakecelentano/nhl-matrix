@@ -18,7 +18,8 @@ def main():
         game.pretty_print()
 
     bruins_logo = bruins.get_logo()
-    # show the image in a window
+    print(bruins_logo)
+
     
 
 
