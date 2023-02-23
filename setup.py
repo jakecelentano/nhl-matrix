@@ -1,0 +1,5 @@
+STATS_API_PREFIX = "https://statsapi.web.nhl.com"
+
+OBSERVE_DAYLIGHT_SAVINGS = True
+STANDARD_TIMEZONE = "EST"
+DST_TIMEZONE = "EDT"
