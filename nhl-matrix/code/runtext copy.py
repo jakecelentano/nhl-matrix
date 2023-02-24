@@ -28,9 +28,11 @@ class RunText(SampleBase):
             logo = 'images/nhl.png'
         x = 5
         y = 5
-        offscreen_canvas.SetImage(logo, x, y)
-        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-        time.sleep(10)
+
+        while True: 
+            offscreen_canvas.SetImage(logo, x, y)
+            offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+            time.sleep(10)
 
 
 # Main function
