@@ -25,7 +25,6 @@ class Game(object):
 
     # YYYY-MM-DD HH:MM:SS
     def get_game_datetime(self):
-        print(self.time_zone)
         dt = datetime.datetime.strptime(self.game_json['gameData']['datetime']['dateTime'], "%Y-%m-%dT%H:%M:%SZ")
         if self.time_zone == "UTC":
             return dt
@@ -58,7 +57,6 @@ class Game(object):
     
     def get_game_time_prety(self):
         time = str(self.get_game_time())
-        print(time)
         hour = time.split(":")[0]
         minute = time.split(":")[1]
         if int(hour) > 12:
