@@ -5,6 +5,7 @@ from rgbmatrix import graphics
 import time
 from nhl import NHL
 from team import Team
+from PIL import Image
 
 
 class RunText(SampleBase):
@@ -47,7 +48,7 @@ class RunText(SampleBase):
             logo = 'images/nhl.png'
         # create image object with the logo
         # draw the image on the canvas
-        image = graphics.Image()
+        image = Image.new('RGB', (32, 32))
         image.LoadPng(logo)
         offscreen_canvas.SetImage(logo, x, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
