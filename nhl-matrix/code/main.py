@@ -1,7 +1,17 @@
 from nhl import NHL
 import datetime
+from screen import Screen
 
 def main():
+    # Main function
+    scr = Screen()
+    if (not scr.process()):
+        print("Error processing arguments")
+        scr.print_help()
+
+
+
+
     # get current year
     year = datetime.datetime.now().year
     nhl = NHL(year)

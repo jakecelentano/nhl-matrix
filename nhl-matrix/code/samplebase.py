@@ -8,7 +8,7 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 
 class SampleBase(object):
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.parser = argparse.ArgumentParser()
 
         self.parser.add_argument("-r", "--led-rows", action="store", help="Display rows. 16 for 16x32, 32 for 32x32. Default: 64", default=64, type=int)

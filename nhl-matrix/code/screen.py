@@ -18,9 +18,9 @@ BRUINS_BLACK = graphics.Color(0, 0, 0)
 
 
 class Screen(SampleBase):
-    def __init__(self, *args, **kwargs):
-        super(Screen, self).__init__(*args, **kwargs)
-        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="Hello world!")
+    def __init__(self):
+        super(Screen, self).__init__()
+        
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -74,12 +74,3 @@ class Screen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, BRUINS_YELLOW)
 
 
-
-
-
-# Main function
-if __name__ == "__main__":
-    scr = Screen()
-    if (not scr.process()):
-        print("Error processing arguments")
-        scr.print_help()
