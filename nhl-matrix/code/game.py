@@ -93,6 +93,9 @@ class Game(object):
     def pretty_print(self):
         print("{} vs {} - {} @ {}".format(self.get_game_home_team_name(), self.get_game_away_team_name(), self.get_game_date_prety(), self.get_game_time_prety()))
 
+    def pretty_print_string(self):
+        return "{} vs {} - {} @ {}".format(self.get_game_home_team_name(), self.get_game_away_team_name(), self.get_game_date_prety(), self.get_game_time_prety())
+
     def get_time_zone(self):
         if OBSERVE_DAYLIGHT_SAVINGS:
             if datetime.datetime.now().dst():

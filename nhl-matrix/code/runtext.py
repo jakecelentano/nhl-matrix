@@ -3,6 +3,8 @@
 from samplebase import SampleBase
 from rgbmatrix import graphics
 import time
+from nhl import NHL
+from team import Team
 
 
 class RunText(SampleBase):
@@ -17,6 +19,12 @@ class RunText(SampleBase):
         textColor = graphics.Color(255, 255, 0)
         pos = offscreen_canvas.width
         my_text = self.args.text
+        year = 2023
+        nhl = NHL(year)
+        bruins = nhl.get_team_by_name("Boston Bruins")
+        next_games = bruins.get_next_games(2)
+        next_game = next_games[0]
+        my_text = next_game.pretty_print_string()
 
         while True:
             offscreen_canvas.Clear()
