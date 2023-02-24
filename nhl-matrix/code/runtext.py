@@ -45,7 +45,9 @@ class RunText(SampleBase):
         try:
             logo = team.get_logo()
         except:
-            logo = 'images/nhl.png'
+            logo = 'logos/nhl.png'
+        
+        print(logo)
         # create image object with the logo
         # draw the image on the canvas
         image = Image.open(logo)
