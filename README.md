@@ -145,3 +145,5 @@ The source of truth for what is available in the Python bindings may be found [h
 ### User
 
 As noted in the Performance section above, Python programs not run as `root` will not be as high-performance as those run as `root`.  When running as `root`, be aware of a potentially-unexpected behavior: to reduce the security attack surface, initializing an RGBMatrix as `root` changes the user from `root` to `daemon` (see [#1170](https://github.com/hzeller/rpi-rgb-led-matrix/issues/1170) for more information) by default.  This means, for instance, that some file operations possible before initializing the RGBMatrix will not be possible after initialization.  To disable this behavior, set `drop_privileges=False` in RGBMatrixOptions, but be aware that doing so will reduce security.
+
+Colors from: https://github.com/jimniels/teamcolors

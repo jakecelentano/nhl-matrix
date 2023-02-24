@@ -20,6 +20,7 @@ def main():
     bruins_logo = bruins.get_logo()
     print(bruins_logo)
 
+    print(bruins.get_team_colors())
     
 
 

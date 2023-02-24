@@ -5,6 +5,7 @@ from setup import STATS_API_PREFIX, LOGO_API_PREFIX
 import datetime
 import cairosvg
 import os
+import json
 
 class Team(object):
     def __init__(self, team_id, team_name, team_abbreviation, team_link):
@@ -71,6 +72,22 @@ class Team(object):
                 
 
         return 'logos/{}.png'.format(self.team_name)
+    
+    
+    def get_team_json(self):
+        team_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id)).json()
+        return team_json
+    
+    def get_team_colors(self):
+        json_file = open('nhl_colors.json', 'r')
+        json_data = json.load(json_file)
+        
+        for team in json_data:
+            if team['name'] == self.team_name:
+                colors = team['colors']['hex']
+                return colors
+        
+        return ['#FFFFFF', '#111111']
 
 
 

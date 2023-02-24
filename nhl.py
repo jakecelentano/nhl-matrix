@@ -34,4 +34,4 @@ class NHL(object):
             for game in date['games']:
                 games.append(Game(game['gamePk'], game['link']))
         return games
-        
+    
