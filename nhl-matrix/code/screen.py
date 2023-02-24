@@ -20,13 +20,15 @@ BRUINS_BLACK = graphics.Color(0, 0, 0)
 class Screen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(Screen, self).__init__(*args, **kwargs)
-        self.parser.add_argument("-t", "--text", help="The text to show", default="Hello world!")
+        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="Hello world!")
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         year = datetime.datetime.now().year
         nhl = NHL(year)
+        print(year)
         for team in NHL_TEAMS:
+            print(team)
             team = nhl.get_team_by_name(team)
             self.drawBorder(offscreen_canvas)
             self.drawLogo(offscreen_canvas, team=team)
