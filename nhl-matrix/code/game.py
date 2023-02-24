@@ -25,6 +25,7 @@ class Game(object):
 
     # YYYY-MM-DD HH:MM:SS
     def get_game_datetime(self):
+        print(self.time_zone)
         dt = datetime.datetime.strptime(self.game_json['gameData']['datetime']['dateTime'], "%Y-%m-%dT%H:%M:%SZ")
         if self.time_zone == "UTC":
             return dt
