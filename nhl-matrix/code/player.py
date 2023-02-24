@@ -1,6 +1,6 @@
 import requests
 from statistic import Statistic
-from setup import STATS_API_PREFIX
+from config import STATS_API_PREFIX
 
 class Player(object):
     def __init__(self, player_id, player_name, player_link):

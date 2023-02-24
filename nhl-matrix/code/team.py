@@ -1,7 +1,7 @@
 import requests
 from player import Player
 from game import Game
-from setup import STATS_API_PREFIX, LOGO_API_PREFIX
+from config import STATS_API_PREFIX, LOGO_API_PREFIX
 import datetime
 import cairosvg
 import os

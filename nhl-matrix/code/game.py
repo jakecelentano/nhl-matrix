@@ -1,5 +1,5 @@
 import requests
-from setup import STATS_API_PREFIX, OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE
+from config import STATS_API_PREFIX, OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE
 import datetime
 
 class Game(object):
