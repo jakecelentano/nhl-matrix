@@ -57,8 +57,8 @@ class Game(object):
         return "{} {}/{}/{}".format(day_of_week, month, day, year)
     
     def get_game_time_prety(self):
-        print(time)
         time = str(self.get_game_time())
+        print(time)
         hour = time.split(":")[0]
         minute = time.split(":")[1]
         if int(hour) > 12:
