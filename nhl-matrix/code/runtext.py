@@ -15,11 +15,11 @@ class RunText(SampleBase):
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        font = graphics.Font()
-        font.LoadFont("fonts/4x6.bdf")
-        textColor = graphics.Color(255, 255, 0)
-        pos = offscreen_canvas.width
-        my_text = self.args.text
+        #font = graphics.Font()
+        #font.LoadFont("fonts/4x6.bdf")
+        #textColor = graphics.Color(255, 255, 0)
+        #pos = offscreen_canvas.width
+        #my_text = self.args.text
         year = 2023
         nhl = NHL(year)
         bruins = nhl.get_team_by_name("Boston Bruins")
@@ -48,8 +48,7 @@ class RunText(SampleBase):
             logo = 'images/nhl.png'
         # create image object with the logo
         # draw the image on the canvas
-        image = Image.new('RGB', (32, 32))
-        image.LoadPng(logo)
+        image = Image.open(logo)
         offscreen_canvas.SetImage(logo, x, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
