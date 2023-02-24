@@ -38,8 +38,8 @@ class SampleBase(object):
         print("Running")
 
     def process(self):
+        print("Processing")
         self.args = self.parser.parse_args()
-
         options = RGBMatrixOptions()
 
         if self.args.led_gpio_mapping != None:
