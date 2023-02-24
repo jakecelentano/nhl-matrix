@@ -20,7 +20,7 @@ BRUINS_BLACK = graphics.Color(0, 0, 0)
 class Screen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(Screen, self).__init__(*args, **kwargs)
-        self.parser.add_argument("-t", "--text", help="The text to show", default="Hello world!")
+        #self.parser.add_argument("-t", "--text", help="The text to show", default="Hello world!")
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
