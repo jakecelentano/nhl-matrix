@@ -30,15 +30,15 @@ class Game(object):
         if self.time_zone == "UTC":
             return dt
         elif self.time_zone == "EST":
-            return dt + datetime.timedelta(hours=5)
+            return dt - datetime.timedelta(hours=5)
         elif self.time_zone == "EDT":
-            return dt + datetime.timedelta(hours=4)
+            return dt - datetime.timedelta(hours=4)
         elif self.time_zone == "CST":
-            return dt + datetime.timedelta(hours=6)
+            return dt - datetime.timedelta(hours=6)
         elif self.time_zone == "MST":
-            return dt + datetime.timedelta(hours=7)
+            return dt - datetime.timedelta(hours=7)
         elif self.time_zone == "PST":
-            return dt + datetime.timedelta(hours=8)
+            return dt - datetime.timedelta(hours=8)
         else:
             return dt
 
