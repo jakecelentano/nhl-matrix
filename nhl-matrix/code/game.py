@@ -26,21 +26,20 @@ class Game(object):
     # YYYY-MM-DD HH:MM:SS
     def get_game_datetime(self):
         dt = datetime.datetime.strptime(self.game_json['gameData']['datetime']['dateTime'], "%Y-%m-%dT%H:%M:%SZ")
-        match self.time_zone:
-            case "UTC":
-                return dt
-            case "EST":
-                return dt - datetime.timedelta(hours=5)
-            case "EDT":
-                return dt - datetime.timedelta(hours=4)
-            case "CST":
-                return dt - datetime.timedelta(hours=6)
-            case "MST":
-                return dt - datetime.timedelta(hours=7)
-            case "PST":
-                return dt - datetime.timedelta(hours=8)
-            case _:
-                return dt
+        if self.time_zone == "UTC":
+            return dt
+        elif self.time_zone == "EST":
+            return dt + datetime.timedelta(hours=5)
+        elif self.time_zone == "EDT":
+            return dt + datetime.timedelta(hours=4)
+        elif self.time_zone == "CST":
+            return dt + datetime.timedelta(hours=6)
+        elif self.time_zone == "MST":
+            return dt + datetime.timedelta(hours=7)
+        elif self.time_zone == "PST":
+            return dt + datetime.timedelta(hours=8)
+        else:
+            return dt
 
     def get_game_datetime_string(self):
         return self.get_game_datetime().strftime("%Y-%m-%d %H:%M:%S")
