@@ -50,7 +50,8 @@ class RunText(SampleBase):
         print(logo)
         # create image object with the logo
         # draw the image on the canvas
-        image = Image.open(logo)
+        image = Image.new("RGB", (32, 32))  # Can be larger than matrix if wanted!!
+        image.paste(logo, (0, 0))
         offscreen_canvas.SetImage(logo, x, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
