@@ -77,6 +77,7 @@ class Screen(SampleBase):
 def main():
     screen = Screen()
     if (not screen.process()):
+        print("Error processing arguments")
         screen.print_help()
 
 
