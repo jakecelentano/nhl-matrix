@@ -28,7 +28,23 @@ class RunText(SampleBase):
         year = 2023
         nhl = NHL(year)
         bruins = nhl.get_team_by_name("Boston Bruins")
-        self.drawUpcomingGamesScreen(offscreen_canvas, bruins.get_next_games(2))
+        games = bruins.get_next_games(2)
+        game = games[0]
+        hid = game.get_game_home_team_id()
+        aid = game.get_game_away_team_id()
+        print(hid)
+        print(aid)
+        home_team = self.nhl.get_team_by_id(hid)
+        away_team = self.nhl.get_team_by_id(aid)
+        print(home_team.get_name())
+        print(away_team.get_name())
+        home_team_logo = home_team.get_logo()
+        away_team_logo = away_team.get_logo()
+        print(home_team_logo)
+        print(away_team_logo)
+        return
+
+        self.drawUpcomingGamesScreen(offscreen_canvas, games)
         self.drawBorder(offscreen_canvas)
         time.sleep(100)
         
