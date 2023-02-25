@@ -47,8 +47,8 @@ class RunText(SampleBase):
         #    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
     
     def drawUpcomingGamesScreen(self, offscreen_canvas, games=[]):
-        x =4
-        y = 4
+        x = 2
+        y = 2
         for game in games:
             home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
             away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
@@ -56,13 +56,13 @@ class RunText(SampleBase):
             away_team_logo = away_team.get_logo()
             home_team_logo = Image.open(home_team_logo)
             away_team_logo = Image.open(away_team_logo)
-            home_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
-            away_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
+            home_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
+            away_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
             home_team_logo = home_team_logo.convert('RGB')
             away_team_logo = away_team_logo.convert('RGB')
             offscreen_canvas.SetImage(home_team_logo, x, y)
-            offscreen_canvas.SetImage(away_team_logo, x+24, y)
-            y += 24
+            offscreen_canvas.SetImage(away_team_logo, x+30, y)
+            y += 30
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     def drawBorder(self, offscreen_canvas):
