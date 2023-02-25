@@ -36,8 +36,6 @@ class RunText(SampleBase):
         print(aid)
         home_team = self.nhl.get_team_by_id(hid)
         away_team = self.nhl.get_team_by_id(aid)
-        print(home_team.get_name())
-        print(away_team.get_name())
         home_team_logo = home_team.get_logo()
         away_team_logo = away_team.get_logo()
         print(home_team_logo)
