@@ -41,18 +41,11 @@ class RunText(SampleBase):
         #    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
     
     def drawLogo(self, offscreen_canvas, x=0, y=4, team=None):
-        # offscreen_canvas.Clear()
-        try:
-            logo = team.get_logo()
-        except:
-            logo = 'logos/nhl.png'
-        
-        print(logo)
-        # create image object with the logo
-        # draw the image on the canvas
-        image = Image.new("RGB", (32, 32))  # Can be larger than matrix if wanted!!
-        image.paste(logo, (0, 0))
-        offscreen_canvas.SetImage(logo, x, y)
+        logo = 'logos/nhl.png'
+        image = Image.open(logo)
+        image.thumbnail((15, 15), Image.ANTIALIAS)
+        image.convert('RGB')
+        offscreen_canvas.SetImage(image, x, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
 
