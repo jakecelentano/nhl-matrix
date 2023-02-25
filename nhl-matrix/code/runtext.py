@@ -44,12 +44,17 @@ class RunText(SampleBase):
         #    time.sleep(0.05)
         #    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
     
-    def drawLogo(self, offscreen_canvas, x=4, y=4, team=None):
-        logo = 'logos/Boston Bruins.png'
-        image = Image.open(logo)
-        image.thumbnail((56, 56), Image.ANTIALIAS)
+    def drawLogos(self, offscreen_canvas, x=4, y=4, team=None):
+        logo1 = 'logos/Boston Bruins.png'
+        logo2 = 'logos/nhl.png'
+        image = Image.open(logo1)
+        image2 = Image.open(logo2)
+        image.thumbnail((24, 24), Image.ANTIALIAS)
+        image2.thumbnail((24, 24), Image.ANTIALIAS)
         image = image.convert('RGB')
+        image2 = image2.convert('RGB')
         offscreen_canvas.SetImage(image, x, y)
+        offscreen_canvas.SetImage(image2, x+24, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     def drawBorder(self, offscreen_canvas):
