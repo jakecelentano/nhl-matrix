@@ -6,6 +6,7 @@ import time
 from nhl import NHL
 from team import Team
 from PIL import Image
+import datetime
 
 
 BRUINS_YELLOW = graphics.Color(253, 185, 39)
@@ -15,6 +16,7 @@ class RunText(SampleBase):
     def __init__(self, *args, **kwargs):
         super(RunText, self).__init__(*args, **kwargs)
         self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="Hello world!")
+        self.nhl = NHL(str(datetime.datetime.now().year))
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -26,9 +28,9 @@ class RunText(SampleBase):
         year = 2023
         nhl = NHL(year)
         bruins = nhl.get_team_by_name("Boston Bruins")
-        self.drawLogos(offscreen_canvas, team1=bruins, team2=bruins)
+        self.drawUpcomingGamesScreen(offscreen_canvas, bruins.get_next_games(2))
         self.drawBorder(offscreen_canvas)
-        time.sleep(15)
+        time.sleep(100)
         
         #next_games = bruins.get_next_games(2)
         #next_game = next_games[0]
@@ -44,17 +46,23 @@ class RunText(SampleBase):
         #    time.sleep(0.05)
         #    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
     
-    def drawLogos(self, offscreen_canvas, x=4, y=4, team1=None, team2=None):
-        logo1 = 'logos/Boston Bruins.png'
-        logo2 = 'logos/nhl.png'
-        image = Image.open(logo1)
-        image2 = Image.open(logo2)
-        image.thumbnail((24, 24), Image.ANTIALIAS)
-        image2.thumbnail((24, 24), Image.ANTIALIAS)
-        image = image.convert('RGB')
-        image2 = image2.convert('RGB')
-        offscreen_canvas.SetImage(image, x, y)
-        offscreen_canvas.SetImage(image2, x+24, y)
+    def drawUpcomingGamesScreen(self, offscreen_canvas, games=[]):
+        x =4
+        y = 4
+        for game in games:
+            home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
+            away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
+            home_team_logo = home_team.get_logo()
+            away_team_logo = away_team.get_logo()
+            home_team_logo = Image.open(home_team_logo)
+            away_team_logo = Image.open(away_team_logo)
+            home_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
+            away_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
+            home_team_logo = home_team_logo.convert('RGB')
+            away_team_logo = away_team_logo.convert('RGB')
+            offscreen_canvas.SetImage(home_team_logo, x, y)
+            offscreen_canvas.SetImage(away_team_logo, x+24, y)
+            y += 24
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     def drawBorder(self, offscreen_canvas):
