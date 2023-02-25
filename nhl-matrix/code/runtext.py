@@ -44,7 +44,7 @@ class RunText(SampleBase):
         logo = 'logos/nhl.png'
         image = Image.open(logo)
         image.thumbnail((15, 15), Image.ANTIALIAS)
-        image.convert('RGB')
+        image = image.convert('RGB')
         offscreen_canvas.SetImage(image, x, y)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
