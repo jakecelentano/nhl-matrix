@@ -26,7 +26,7 @@ class RunText(SampleBase):
         year = 2023
         nhl = NHL(year)
         bruins = nhl.get_team_by_name("Boston Bruins")
-        self.drawLogo(offscreen_canvas, team=bruins)
+        self.drawLogos(offscreen_canvas, team1=bruins, team2=bruins)
         self.drawBorder(offscreen_canvas)
         time.sleep(15)
         
@@ -44,7 +44,7 @@ class RunText(SampleBase):
         #    time.sleep(0.05)
         #    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
     
-    def drawLogos(self, offscreen_canvas, x=4, y=4, team=None):
+    def drawLogos(self, offscreen_canvas, x=4, y=4, team1=None, team2=None):
         logo1 = 'logos/Boston Bruins.png'
         logo2 = 'logos/nhl.png'
         image = Image.open(logo1)
