@@ -60,12 +60,12 @@ class Team(object):
     def get_logo(self):
         # check if logo already exists
         
-        if os.path.isfile('logos/{}.png'.format(self.id)):
-            return 'logos/{}.png'.format(self.id)
+        if os.path.isfile('logos/{}.png'.format(self.team_id)):
+            return 'logos/{}.png'.format(self.team_id)
         else:
             url = LOGO_API_PREFIX + '/{}.svg'.format(self.team_id)
             try:
-                cairosvg.svg2png(url=url, write_to='logos/{}.png'.format(self.id), output_width=100, output_height=100)
+                cairosvg.svg2png(url=url, write_to='logos/{}.png'.format(self.team_id), output_width=100, output_height=100)
             except:
                 print("Couldn't get logo for {}".format(self.team_name))
                 print(url)
