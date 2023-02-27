@@ -14,6 +14,7 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
+        self. matrix = super().matrix
 
 
         
