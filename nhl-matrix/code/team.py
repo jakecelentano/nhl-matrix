@@ -89,6 +89,9 @@ class Team(object):
                 return colors
         
         return ['#FFFFFF', '#111111']
+    
+    def get_primary_color(self):
+        return self.get_team_colors()[0]
 
 
 
