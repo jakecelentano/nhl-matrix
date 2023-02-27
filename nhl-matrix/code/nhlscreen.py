@@ -13,8 +13,8 @@ from config import DEFAULT_FONT, DEFAULT_FONT_COLOR, DEFAULT_TEAM
 class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
+        self.matrix = super(NHLScreen, sefl).get_matrix()
         self.nhl = NHL(str(datetime.datetime.now().year))
-        self. matrix = super().matrix
 
 
         
