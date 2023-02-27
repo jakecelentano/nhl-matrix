@@ -5,7 +5,7 @@ from nhl import NHL
 from team import Team
 from PIL import Image
 import datetime
-from config import DEFAULT_FONT, DEFAULT_FONT_COLOR
+from config import DEFAULT_FONT, DEFAULT_FONT_COLOR, DEFAULT_TEAM
 
 
 
@@ -14,17 +14,20 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
-        self.font = graphics.Font()
-        self.font.LoadFont(DEFAULT_FONT)
-        self.color = DEFAULT_FONT_COLOR
+
         
-        
-    def drawUpcomingGamesScreen(self, team=None):
+    def drawUpcomingGamesScreen(self, team):
+        font = graphics.Font()
+        font.LoadFont(DEFAULT_FONT)
+        color = graphics.Color(DEFAULT_FONT_COLOR[0], DEFAULT_FONT_COLOR[1], DEFAULT_FONT_COLOR[2])
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         x = 2
-        y = 2
-        team_color = self.hexToRGB(team.get_primary_color())
+        y = 2   
+        team_color = graphics.Color(team.get_primary_color()[0], team.get_primary_color()[1], team.get_primary_color()[2])
+        
+
         games = team.get_next_games(2)
+        team 
 
         for game in games:
             home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -59,8 +62,3 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, self.color)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    
-    def hexToRGB(self, hex):
-        hex = hex.lstrip('#')
-        hlen = len(hex)
-        return tuple(int(hex[i:i+hlen//3], 16) for i in range(0, hlen, hlen//3))

@@ -10,8 +10,8 @@ import datetime
 from config import TEAMS
 from nhlscreen import NHLScreen
 
-BRUINS_YELLOW = graphics.Color(253, 185, 39)
-BRUINS_BLACK = graphics.Color(0, 0, 0)
+
+
 
 class GamesTracker(SampleBase):
     def __init__(self, *args, **kwargs):

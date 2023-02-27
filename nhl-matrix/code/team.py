@@ -86,9 +86,19 @@ class Team(object):
         for team in json_data:
             if team['name'] == self.team_name:
                 colors = team['colors']['hex']
+                colors = [self.hexToRGB(color) for color in colors]
                 return colors
         
-        return ['#FFFFFF', '#111111']
+
+        return [self.hexToRGB('#123456'), self.hexToRGB('#FFFFFF')]
+    
+
+
+    
+    def hexToRGB(self, hex):
+        hex = hex.lstrip('#')
+        hlen = len(hex)
+        return tuple(int(hex[i:i+hlen//3], 16) for i in range(0, hlen, hlen//3))
     
     def get_primary_color(self):
         return self.get_team_colors()[0]
