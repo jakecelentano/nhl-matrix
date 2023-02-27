@@ -93,6 +93,10 @@ class Team(object):
         return [self.hexToRGB('#123456'), self.hexToRGB('#FFFFFF')]
     
 
+    def get_name(self):
+        return self.team_name
+    
+
 
     
     def hexToRGB(self, hex):

@@ -26,6 +26,7 @@ class GamesTracker(SampleBase):
         while True:
             for team in TEAMS:
                 team = nhl.get_team_by_name(team)
+                print("Displaying upcoming games for " + team.get_name())
                 screen = NHLScreen()
                 screen.drawUpcomingGamesScreen(team)
                 time.sleep(10)

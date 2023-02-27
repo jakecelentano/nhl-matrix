@@ -14,13 +14,13 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
+        self.offscreen_canvas = self.matrix.CreateFrameCanvas()
 
         
     def drawUpcomingGamesScreen(self, team):
         font = graphics.Font()
         font.LoadFont(DEFAULT_FONT)
         color = graphics.Color(DEFAULT_FONT_COLOR[0], DEFAULT_FONT_COLOR[1], DEFAULT_FONT_COLOR[2])
-        offscreen_canvas = self.matrix.CreateFrameCanvas()
         x = 2
         y = 2   
         team_color = graphics.Color(team.get_primary_color()[0], team.get_primary_color()[1], team.get_primary_color()[2])
