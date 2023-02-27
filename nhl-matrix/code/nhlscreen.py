@@ -14,11 +14,11 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
-        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="Hello world!")
-        self.offscreen_canvas = self.matrix.CreateFrameCanvas()
+
 
         
     def drawUpcomingGamesScreen(self, team):
+        offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
         font.LoadFont(DEFAULT_FONT)
         color = graphics.Color(DEFAULT_FONT_COLOR[0], DEFAULT_FONT_COLOR[1], DEFAULT_FONT_COLOR[2])
