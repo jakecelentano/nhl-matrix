@@ -14,6 +14,7 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
+        self.parser.add_argument("-t", "--text", help="The text to scroll on the RGB LED panel", default="Hello world!")
         self.offscreen_canvas = self.matrix.CreateFrameCanvas()
 
         
