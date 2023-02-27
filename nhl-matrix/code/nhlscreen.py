@@ -14,7 +14,7 @@ class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL(str(datetime.datetime.now().year))
-        self.default_font = graphics.Font()
+        self.font = graphics.Font()
         self.font.LoadFont(DEFAULT_FONT)
         self.color = DEFAULT_FONT_COLOR
         
