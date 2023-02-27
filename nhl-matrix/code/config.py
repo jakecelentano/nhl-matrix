@@ -1,4 +1,4 @@
-import graphics
+from rgbmatrix import graphics
 
 STATS_API_PREFIX = "https://statsapi.web.nhl.com"
 LOGO_API_PREFIX = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light"

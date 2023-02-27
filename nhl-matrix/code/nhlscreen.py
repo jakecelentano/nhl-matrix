@@ -64,12 +64,3 @@ class NHLScreen(SampleBase):
         hex = hex.lstrip('#')
         hlen = len(hex)
         return tuple(int(hex[i:i+hlen//3], 16) for i in range(0, hlen, hlen//3))
-    
-
-
-# Main function
-if __name__ == "__main__":
-    run_text = RunText()
-    if (not run_text.process()):
-        print("Error processing arguments")
-        run_text.print_help()
