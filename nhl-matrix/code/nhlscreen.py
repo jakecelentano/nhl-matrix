@@ -50,7 +50,6 @@ class NHLScreen():
             graphics.DrawText(offscreen_canvas, font, x+30, y+30, team_color, away_team.get_name())
             # draw game time
             game_time = game.get_game_time()
-            game_time = game_time.strftime("%I:%M %p")
             graphics.DrawText(offscreen_canvas, font, x, y+45, team_color, game_time)
             y += 30
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
