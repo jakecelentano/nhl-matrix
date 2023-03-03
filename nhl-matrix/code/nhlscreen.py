@@ -75,7 +75,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(offscreen_canvas)
         font = graphics.Font()
-        font.LoadFont("fonts/4x6.bdf")
+        font.LoadFont("fonts/5x8.bdf")
         
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -95,7 +95,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+36, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "@ ")
+        graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "@")
 
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
@@ -103,7 +103,6 @@ class NHLScreen(SampleBase):
         game_day = game.get_game_day()
 
         # draw day of week
-        font.LoadFont("fonts/5x8.bdf")
         graphics.DrawText(offscreen_canvas, font, x+2, y+32, graphics.Color(255, 255, 255), game_day_of_week)
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
