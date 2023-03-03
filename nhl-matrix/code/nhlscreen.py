@@ -141,8 +141,8 @@ class NHLScreen(SampleBase):
 
 
         # paste logos onto canvas in top left and bottom right
-        offscreen_canvas.SetImage(home_team_logo, x-18, y-18)
-        offscreen_canvas.SetImage(home_team_logo, x+30, y+30)
+        offscreen_canvas.SetImage(home_team_logo, x-24, y-24)
+        offscreen_canvas.SetImage(home_team_logo, x+20, y+20)
 
         #YYYY-MM-DD
         game_date =  game.get_game_date()
