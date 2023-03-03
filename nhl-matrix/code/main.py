@@ -13,10 +13,12 @@ from samplebase import SampleBase
 
 
 def main():
+    nhl = NHL(str(datetime.datetime.now().year))
     screen = NHLScreen()
 
     while True:
         for team in TEAMS:
+            team = nhl.get_team_by_name(team)
             screen.drawUpcomingGamesScreen(team)
             time.sleep(10)
 
