@@ -26,7 +26,7 @@ class NHLScreen(SampleBase):
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
 
-        offscreen_canvas = self.getUpcomingGamesScreen()
+        offscreen_canvas = self.getUpcomingGameScreen()
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         while True:
             time.sleep(10)
