@@ -23,8 +23,7 @@ class NHLScreen(SampleBase):
     def run(self):
 
         # start
-        team = self.args.team
-        self.team = self.nhl.get_team_by_name(self.team)
+        self.team = self.nhl.get_team_by_name(self.args.team)
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
