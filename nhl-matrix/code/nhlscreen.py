@@ -53,6 +53,7 @@ class NHLScreen():
             graphics.DrawText(offscreen_canvas, font, x, y+45, team_color, game_time)
             y += 30
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+        time.sleep(20)
 
     def drawBorder(self):
         graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, self.color)
