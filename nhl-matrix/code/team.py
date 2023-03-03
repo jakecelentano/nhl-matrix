@@ -44,7 +44,7 @@ class Team(object):
                 games.append(Game(game['gamePk'], game['link']))
         return games
 
-    def get_next_games(self, num_games):
+    def get_next_games(self, num_games=2):
         days = 14
         start_date = datetime.datetime.now().strftime("%Y-%m-%d")
         end_date = (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d")
