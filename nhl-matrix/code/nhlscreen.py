@@ -124,7 +124,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(offscreen_canvas)
         font = graphics.Font()
-        font.LoadFont("fonts/5x8.bdf")
+        font.LoadFont("fonts/4x6.bdf")
         
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -145,14 +145,14 @@ class NHLScreen(SampleBase):
 
         # paste logos onto canvas
         offscreen_canvas.SetImage(home_team_logo, x, y)
-        offscreen_canvas.SetImage(away_team_logo, x, y+36)
+        offscreen_canvas.SetImage(away_team_logo, x, y+26)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+12, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
+        graphics.DrawText(offscreen_canvas, font, x+26, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
 
         # draw team names to the right of logos
-        graphics.DrawText(offscreen_canvas, font, x+36, y+8, graphics.Color(255, 255, 255), home_team.get_name())
-        graphics.DrawText(offscreen_canvas, font, x+36, y+44, graphics.Color(255, 255, 255), away_team.get_name())
+        graphics.DrawText(offscreen_canvas, font, x+28, y+8, graphics.Color(255, 255, 255), home_team.get_name())
+        graphics.DrawText(offscreen_canvas, font, x+28, y+44, graphics.Color(255, 255, 255), away_team.get_name())
 
 
         
