@@ -26,9 +26,16 @@ class NHLScreen(SampleBase):
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
 
+        offscreen_canvas = self.getUpcomingGamesScreen()
+        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         while True:
-            self.drawUpcomingGamesScreen()
-            time.sleep(5)
+            time.sleep(10)
+            # wait for keyboard interrupt
+            try:
+                pass
+            except KeyboardInterrupt:
+                print("Keyboard interrupt")
+                break
 
     
     def drawBorder(self, offscreen_canvas=None):
@@ -39,9 +46,9 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
         graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
-        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+        #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def drawUpcomingGamesScreen(self):
+    def getUpcomingGamesScreen(self):
         color = self.color
         team = self.team
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -79,7 +86,9 @@ class NHLScreen(SampleBase):
             graphics.DrawText(offscreen_canvas, font, x, y+45, color, game_time)
             y += 30
         
-        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+        return offscreen_canvas
+        
+        
 
 
 
