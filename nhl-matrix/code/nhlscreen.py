@@ -105,7 +105,9 @@ class NHLScreen(SampleBase):
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
         # get current day in YYYY-MM-DD
-        current_date = str(datetime.datetime.now().year) + "-" + str(datetime.datetime.now().month) + "-" + str(datetime.datetime.now().day) 
+        current_date = str(datetime.datetime.now().year) + "-" + str(datetime.datetime.now().month) + "-" + str(datetime.datetime.now().day)
+        print("Current date: " + current_date)
+        print("Game date: " + game_date) 
         if game_date == current_date:
             game_day_of_week = "Today"
             if int(game_time.split(":")[0]) >= 18:
