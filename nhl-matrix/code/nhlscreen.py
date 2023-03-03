@@ -151,8 +151,8 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+12, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
 
         # draw team names to the right of logos
-        graphics.DrawText(offscreen_canvas, font, x+36, y+8, graphics.Color(255, 255, 255), home_team.get_team_name())
-        graphics.DrawText(offscreen_canvas, font, x+36, y+44, graphics.Color(255, 255, 255), away_team.get_team_name())
+        graphics.DrawText(offscreen_canvas, font, x+36, y+8, graphics.Color(255, 255, 255), home_team.get_name())
+        graphics.DrawText(offscreen_canvas, font, x+36, y+44, graphics.Color(255, 255, 255), away_team.get_name())
 
 
         
