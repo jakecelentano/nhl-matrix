@@ -48,7 +48,7 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGamesScreen(self):
+    def getUpcomingGameScreen(self):
         color = self.color
         team = self.team
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -56,35 +56,31 @@ class NHLScreen(SampleBase):
         font = graphics.Font()
         font.LoadFont("fonts/4x6.bdf")
         
-        games = team.get_next_games(1)
+        game = team.get_next_games(1)[0]
         x, y = 2, 2
-        for game in games:
-            home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
-            away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
-            # get logo paths
-            home_team_logo = home_team.get_logo()
-            away_team_logo = away_team.get_logo()
-            # convert to 30x30 PIL images in RGB
-            home_team_logo = Image.open(home_team_logo)
-            home_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
-            home_team_logo = home_team_logo.convert('RGB')
-            away_team_logo = Image.open(away_team_logo)
-            away_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
-            away_team_logo = away_team_logo.convert('RGB')
-            # paste logos onto canvas
-            offscreen_canvas.SetImage(home_team_logo, x, y)
-            offscreen_canvas.SetImage(away_team_logo, x+30, y)
-            # draw team names
-            #graphics.DrawText(offscreen_canvas, font, x, y+30, color, home_team.get_name())
-            #graphics.DrawText(offscreen_canvas, font, x+30, y+30, color, away_team.get_name())
-            #graphics.DrawText(offscreen_canvas, font, x, y+30, color, home_team.get_name())
-            #graphics.DrawText(offscreen_canvas, font, x+30, y+30, color, away_team.get_name())
-            # draw game time
-            game_time = game.get_game_time()
-            #game_time = game_time.strftime("%I:%M %p")
-            graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-            graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-            y += 30
+        home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
+        away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
+        # get logo paths
+        home_team_logo = home_team.get_logo()
+        away_team_logo = away_team.get_logo()
+        # convert to 30x30 PIL images in RGB
+        home_team_logo = Image.open(home_team_logo)
+        home_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
+        home_team_logo = home_team_logo.convert('RGB')
+        away_team_logo = Image.open(away_team_logo)
+        away_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
+        away_team_logo = away_team_logo.convert('RGB')
+        # paste logos onto canvas
+        offscreen_canvas.SetImage(home_team_logo, x, y)
+        offscreen_canvas.SetImage(away_team_logo, x+30, y)
+
+        # draw vs between logos
+        graphics.DrawText(offscreen_canvas, font, x+15, y+30, color, "vs")
+
+        game_time = game.get_game_time()
+        graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
+        graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
+        y += 30
         
         return offscreen_canvas
         
