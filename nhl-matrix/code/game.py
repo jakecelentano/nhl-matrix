@@ -74,7 +74,7 @@ class Game(object):
         day_of_week = datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%A")
         return "{} {}/{}/{}".format(day_of_week, month, day, year)
     
-    def get_game_time_prety(self):
+    def get_game_time_pretty(self):
         time = str(self.get_game_time())
         hour = time.split(":")[0]
         minute = time.split(":")[1]
