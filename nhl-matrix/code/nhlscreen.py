@@ -144,7 +144,7 @@ class NHLScreen(SampleBase):
 
         # paste logos onto canvas in top left and bottom right
         offscreen_canvas.SetImage(home_team_logo, x-12, y-12)
-        offscreen_canvas.SetImage(away_team_logo, x+28, y+28)
+        offscreen_canvas.SetImage(home_team_logo, x+24, y+24)
         
 
 
