@@ -23,10 +23,11 @@ class NHLScreen(SampleBase):
     def run(self):
         # start
         team = self.args.team
-        print(team)
         self.team = self.nhl.get_team_by_name(team)
-        print(self.team)
-        return
+        if self.team is None:
+            print("Team not found: " + team)
+            return
+
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
