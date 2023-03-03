@@ -105,7 +105,16 @@ class Team(object):
         return tuple(int(hex[i:i+hlen//3], 16) for i in range(0, hlen, hlen//3))
     
     def get_primary_color(self):
-        return self.get_team_colors()[0]
+        colors = self.get_team_colors()
+        for color in colors:
+            r = color[0]
+            g = color[1]
+            b = color[2]
+            luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
+            if (luma > 40):
+                return color
+        return (255, 255, 255)
+                
 
 
 
