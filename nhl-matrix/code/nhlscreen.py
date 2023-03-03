@@ -149,7 +149,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(test_logo2, x+32, y)
 
         # draw line between logos
-        graphics.DrawLine(offscreen_canvas, 32, 0, 32, 63, graphics.Color(255, 255, 255))
+        graphics.DrawLine(offscreen_canvas, 32, 1, 32, 62, graphics.Color(255, 255, 255))
 
         return offscreen_canvas
     
