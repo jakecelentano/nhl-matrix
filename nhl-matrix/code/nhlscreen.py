@@ -150,14 +150,13 @@ class NHLScreen(SampleBase):
 
         # write score
         font.LoadFont("fonts/10x20.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+32, y+8, graphics.Color(255, 255, 255), "0")
-        graphics.DrawText(offscreen_canvas, font, x+32, y+32, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font, x+36, y+20, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font, x+36, y+40, graphics.Color(255, 255, 255), "0")
 
         # write period and time
-        font.LoadFont("fonts/4x6.bdf")
-        
-        graphics.DrawText(offscreen_canvas, font, x, LOGO_SIZE*2 + 6, graphics.Color(255, 255, 255), "1st")
-        graphics.DrawText(offscreen_canvas, font, x+30, LOGO_SIZE*2 + 6, graphics.Color(255, 255, 255), "20:00")
+        font.LoadFont("fonts/6x10.bdf")
+        graphics.DrawText(offscreen_canvas, font, x, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
+        graphics.DrawText(offscreen_canvas, font, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
 
  
 
