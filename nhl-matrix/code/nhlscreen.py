@@ -23,6 +23,7 @@ class NHLScreen(SampleBase):
     def run(self):
         # start
         team = self.args.team
+        screen = self.args.screen
         self.team = self.nhl.get_team_by_name(team)
         if self.team is None:
             print("Team not found: " + team)
@@ -37,11 +38,11 @@ class NHLScreen(SampleBase):
         game_id = game.get_game_id()
 
         # draw the upcoming game screen
-        offscreen_canvas = self.matrix.CreateFrameCanvas()
         #offscreen_canvas = self.getUpcomingGameScreen(game)
-        offscreen_canvas = self.getAltUpcomingGameScreen(game)
+        offscreen_canvas = self.getScoreboardScreen(game)
         print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+        
         while True:
             time.sleep(10)
             # wait for keyboard interrupt
@@ -53,9 +54,7 @@ class NHLScreen(SampleBase):
                 if new_game_id != game_id:
                     game_id = new_game_id
                     # draw the new upcoming game screen
-                    offscreen_canvas = self.matrix.CreateFrameCanvas()
                     offscreen_canvas = self.getUpcomingGameScreen(game)
-                    print("Drawing upcoming game screen")
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                 else:
                     pass
@@ -118,7 +117,7 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
 
     # corner
-    def getAltUpcomingGameScreen(self, game):
+    def getScoreboardScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
         
@@ -139,33 +138,8 @@ class NHLScreen(SampleBase):
 
         
 
-
-        # paste logos onto canvas in top left and bottom right
-        offscreen_canvas.SetImage(home_team_logo, x-24, y-24)
-        offscreen_canvas.SetImage(home_team_logo, x+20, y+20)
-
-        #YYYY-MM-DD
-        game_date =  game.get_game_date()
-        #HH:MM AM/PM
-        game_time = game.get_game_time_pretty()
-        game_day_of_week = game.get_game_day_of_week()
-        current_date = self.getCurrentDate() # YYYY-MM-DD
-        if game_date == current_date:
-            game_day_of_week = "Today"
-            if int(game_time.split(":")[0]) >= 7: # if game is at 7pm or later
-                game_day_of_week = "Tonight"
-
-        # draw day of week
-        font.LoadFont("fonts/5x8.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+26, y+6, graphics.Color(255, 255, 255), "Tonight")
-        # draw @ time
-        font.LoadFont("fonts/6x9.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+26, y+14, graphics.Color(255, 255, 255), "10:00 PM")
-
-
-
-        
-
+        offscreen_canvas.SetImage(home_team_logo, x, y)
+        offscreen_canvas.SetImage(home_team_logo, x+40, y)
 
         return offscreen_canvas
     
