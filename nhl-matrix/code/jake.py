@@ -26,7 +26,6 @@ class Jake(SampleBase):
     
     def drawBorder(self, color):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        color = graphics.Color(255, 255, 255)
         graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
         graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
         graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
