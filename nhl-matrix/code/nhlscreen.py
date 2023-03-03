@@ -146,7 +146,10 @@ class NHLScreen(SampleBase):
         
 
         offscreen_canvas.SetImage(test_logo, x, y)
-        offscreen_canvas.SetImage(test_logo2, x+30, y)
+        offscreen_canvas.SetImage(test_logo2, x+32, y)
+
+        # draw line between logos
+        graphics.DrawLine(offscreen_canvas, 32, 0, 32, 63, graphics.Color(255, 255, 255))
 
         return offscreen_canvas
     
@@ -162,6 +165,8 @@ class NHLScreen(SampleBase):
             day = "0" + str(day)
         
         return str(year) + "-" + str(month) + "-" + str(day)
+    
+
         
         
 
