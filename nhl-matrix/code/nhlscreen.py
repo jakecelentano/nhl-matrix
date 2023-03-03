@@ -37,14 +37,13 @@ class NHLScreen(SampleBase):
         game_id = game.get_game_id()
 
         # draw the upcoming game screen
-        #offscreen_canvas = self.getUpcomingGameScreen(game)
+        offscreen_canvas = self.getUpcomingGameScreen(game)
         offscreen_canvas = self.getScoreboardScreen(game)
         print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         
         while True:
-            time.sleep(10)
-            # wait for keyboard interrupt
+            time.sleep(1)
             try:
                 # get the next game
                 game = self.team.get_next_games(1)[0]

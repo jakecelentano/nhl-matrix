@@ -56,6 +56,7 @@ class Team(object):
             games = self.get_schedule(start_date, end_date)
             num = len(games)
         return games[:num_games]
+    
 
     def get_logo(self):
         # check if logo already exists
