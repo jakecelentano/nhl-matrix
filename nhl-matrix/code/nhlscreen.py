@@ -39,6 +39,7 @@ class NHLScreen(SampleBase):
         # draw the upcoming game screen
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         offscreen_canvas = self.getUpcomingGameScreen(game)
+        print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         while True:
             time.sleep(10)
@@ -53,6 +54,7 @@ class NHLScreen(SampleBase):
                     # draw the new upcoming game screen
                     offscreen_canvas = self.matrix.CreateFrameCanvas()
                     offscreen_canvas = self.getUpcomingGameScreen(game)
+                    print("Drawing upcoming game screen")
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                 else:
                     pass
@@ -95,12 +97,20 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+36, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "@")
-
+        graphics.DrawText(offscreen_canvas, font, x+27, y+20, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
+        
+        #YYYY-MM-DD
+        game_date =  game.get_game_date()
+        #HH:MM AM/PM
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
-        game_month = game.get_game_month()
-        game_day = game.get_game_day()
+        # get current day in YYYY-MM-DD
+        current_date = str(datetime.datetime.now().year) + "-" + str(datetime.datetime.now().month) + "-" + str(datetime.datetime.now().day) 
+        if game_date == current_date:
+            game_day_of_week = "Today"
+            if int(game_time.split(":")[0]) >= 18:
+                game_day_of_week = "Tonight"
+
 
         # draw day of week
         graphics.DrawText(offscreen_canvas, font, x+2, y+32, graphics.Color(255, 255, 255), game_day_of_week)
