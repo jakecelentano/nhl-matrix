@@ -153,8 +153,8 @@ class NHLScreen(SampleBase):
 
         # write score
 
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+20, graphics.Color(255, 255, 255), "0")
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+40, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+48, graphics.Color(255, 255, 255), "0")
 
         # write period and time
 
