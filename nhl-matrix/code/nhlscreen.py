@@ -125,7 +125,7 @@ class NHLScreen(SampleBase):
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
         away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
 
-        LOGO_SIZE = 30
+        LOGO_SIZE = 24
         home_team_logo = home_team.get_logo()
         home_team_logo = Image.open(home_team_logo)
         home_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
@@ -146,10 +146,10 @@ class NHLScreen(SampleBase):
         
 
         offscreen_canvas.SetImage(test_logo, x, y)
-        offscreen_canvas.SetImage(test_logo2, x+32, y)
+        offscreen_canvas.SetImage(test_logo2, x, y+24)
 
-        # draw line between logos
-        graphics.DrawLine(offscreen_canvas, 32, 1, 32, 62, graphics.Color(255, 255, 255))
+ 
+
 
         return offscreen_canvas
     
