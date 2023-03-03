@@ -119,31 +119,31 @@ class NHLScreen(SampleBase):
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
 
-        # vertical logos
-        def getAltUpcomingGameScreen(self, game):
-            offscreen_canvas = self.matrix.CreateFrameCanvas()
-            self.drawBorder(offscreen_canvas)
-            font = graphics.Font()
-            font.LoadFont("fonts/5x8.bdf")
-            
-            x, y = 2, 2
-            home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
-            away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
+    # vertical logos
+    def getAltUpcomingGameScreen(self, game):
+        offscreen_canvas = self.matrix.CreateFrameCanvas()
+        self.drawBorder(offscreen_canvas)
+        font = graphics.Font()
+        font.LoadFont("fonts/5x8.bdf")
+        
+        x, y = 2, 2
+        home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
+        away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
 
-            # convert logos to 30x30 PIL images in RGB
-            home_team_logo = Image.open(home_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
-            away_team_logo = Image.open(away_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
+        # convert logos to 30x30 PIL images in RGB
+        home_team_logo = Image.open(home_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
+        away_team_logo = Image.open(away_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
 
-            # paste logos onto canvas
-            offscreen_canvas.SetImage(home_team_logo, x, y)
-            offscreen_canvas.SetImage(away_team_logo, x, y+36)
+        # paste logos onto canvas
+        offscreen_canvas.SetImage(home_team_logo, x, y)
+        offscreen_canvas.SetImage(away_team_logo, x, y+36)
 
-            # draw vs between logos
-            graphics.DrawText(offscreen_canvas, font, x+12, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
+        # draw vs between logos
+        graphics.DrawText(offscreen_canvas, font, x+12, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
 
-            # draw team names to the right of logos
-            graphics.DrawText(offscreen_canvas, font, x+36, y+8, graphics.Color(255, 255, 255), home_team.get_team_name())
-            graphics.DrawText(offscreen_canvas, font, x+36, y+44, graphics.Color(255, 255, 255), away_team.get_team_name())
+        # draw team names to the right of logos
+        graphics.DrawText(offscreen_canvas, font, x+36, y+8, graphics.Color(255, 255, 255), home_team.get_team_name())
+        graphics.DrawText(offscreen_canvas, font, x+36, y+44, graphics.Color(255, 255, 255), away_team.get_team_name())
 
 
         
