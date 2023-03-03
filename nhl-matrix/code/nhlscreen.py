@@ -116,7 +116,7 @@ class NHLScreen(SampleBase):
         # draw day of week
         graphics.DrawText(offscreen_canvas, font, x+2, y+32, graphics.Color(255, 255, 255), game_day_of_week)
         # draw @ time
-        graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
+        graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "vs" + game_time)
 
         
 

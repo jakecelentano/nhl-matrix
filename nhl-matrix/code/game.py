@@ -9,6 +9,7 @@ class Game(object):
         self.game_json = self.get_game_json() 
         self.time_zone = self.get_time_zone() 
 
+    # example in nhl_samples/game.json
     def get_game_json(self):
         result = ""
         try:
@@ -17,13 +18,18 @@ class Game(object):
             print("Error")
         return result
 
+    # ex: 2022020917
     def get_game_id(self):
         return self.game_id
 
+    # ex: https://statsapi.web.nhl.com/api/v1/game/2022020917/feed/live
     def get_game_link(self):
         return self.game_link
+    
+    def get_game_status(self):
+        return self.game_json['gameData']['status']['abstractGameState']
 
-    # YYYY-MM-DD HH:MM:SS
+    # YYYY-MM-DD HH:MM:SS as datetime object
     def get_game_datetime(self):
         dt = datetime.datetime.strptime(self.game_json['gameData']['datetime']['dateTime'], "%Y-%m-%dT%H:%M:%SZ")
         if self.time_zone == "UTC":
@@ -41,31 +47,40 @@ class Game(object):
         else:
             return dt
 
+    # everything else is as a string, for convenience   
+    # ex: 2019-10-21 19:00:00
     def get_game_datetime_string(self):
         return self.get_game_datetime().strftime("%Y-%m-%d %H:%M:%S")
     
+    # ex: 2019-10-21
     def get_game_date(self):
         return self.get_game_datetime_string().split(" ")[0]
     
+    # ex: 19:00:00
+    def get_game_time(self):
+        return self.get_game_datetime_string().split(" ")[1]
+    
+    # ex: 21
     def get_game_day(self):
         date  = str(self.get_game_date())
         return date.split("-")[2]
     
+    # ex: 10
     def get_game_month(self):
         date  = str(self.get_game_date())
         return date.split("-")[1]
-       
+    
+    # ex: 2019
     def get_game_year(self):
         date  = str(self.get_game_date())
         return date.split("-")[0]
 
+    # ex: Monday
     def get_game_day_of_week(self):
         date  = str(self.get_game_date())
         return datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%A")
 
-
-
-
+    # ex: Monday 10/21/2019
     def get_game_date_prety(self):
         date  = str(self.get_game_date())
         year = date.split("-")[0]
@@ -74,6 +89,7 @@ class Game(object):
         day_of_week = datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%A")
         return "{} {}/{}/{}".format(day_of_week, month, day, year)
     
+    # ex: 07:00 PM
     def get_game_time_pretty(self):
         time = str(self.get_game_time())
         hour = time.split(":")[0]
@@ -87,8 +103,6 @@ class Game(object):
 
 
 
-    def get_game_time(self):
-        return self.get_game_datetime_string().split(" ")[1]
 
 
     def get_game_status(self):
