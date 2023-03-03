@@ -93,7 +93,7 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), game_day_of_week)
         # draw month / day @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+50, graphics.Color(255, 255, 255), game_month + " " + game_day + " @ " + game_time)
-        
+
         
 
 
