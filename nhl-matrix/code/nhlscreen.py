@@ -104,8 +104,7 @@ class NHLScreen(SampleBase):
         #HH:MM AM/PM
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
-        # get current day in YYYY-MM-DD
-        current_date = str(datetime.datetime.now().year) + "-" + str(datetime.datetime.now().month) + "-" + str(datetime.datetime.now().day)
+        current_date = self.getCurrentDate() # YYYY-MM-DD
         print("Current date: " + current_date)
         print("Game date: " + game_date) 
         if game_date == current_date:
@@ -123,6 +122,19 @@ class NHLScreen(SampleBase):
 
 
         return offscreen_canvas
+    
+    def getCurrentDate(self):
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+
+        if month < 10:
+            month = "0" + str(month)
+        if day < 10:
+            day = "0" + str(day)
+        
+        return str(year) + "-" + str(month) + "-" + str(day)
         
         
 
