@@ -31,15 +31,31 @@ class NHLScreen(SampleBase):
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
-        # get screen to show
+        # get the next game
+        game = self.team.get_next_games(1)[0]
+        # get id of the next game
+        game_id = game.get_game_id()
+
+        # draw the upcoming game screen
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        offscreen_canvas = self.getUpcomingGameScreen()
+        offscreen_canvas = self.getUpcomingGameScreen(game)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         while True:
             time.sleep(10)
             # wait for keyboard interrupt
             try:
-                pass
+                # get the next game
+                game = self.team.get_next_games(1)[0]
+                # get id of the next game
+                new_game_id = game.get_game_id()
+                if new_game_id != game_id:
+                    game_id = new_game_id
+                    # draw the new upcoming game screen
+                    offscreen_canvas = self.matrix.CreateFrameCanvas()
+                    offscreen_canvas = self.getUpcomingGameScreen(game)
+                    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+                else:
+                    print("No new game")
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
                 break
@@ -55,15 +71,12 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGameScreen(self, team=None):
-        color = self.color
-        team = self.team
+    def getUpcomingGameScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(offscreen_canvas)
         font = graphics.Font()
         font.LoadFont("fonts/4x6.bdf")
         
-        game = team.get_next_games(1)[0]
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
         away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())

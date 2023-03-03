@@ -80,9 +80,9 @@ class Game(object):
         minute = time.split(":")[1]
         if int(hour) > 12:
             hour = int(hour) - 12
-            return "{}:{} PM".format(hour, minute) + " " + self.time_zone
+            return "{}:{} PM".format(hour, minute)
         else:
-            return "{}:{} AM".format(hour, minute) + " " + self.time_zone
+            return "{}:{} AM".format(hour, minute)
 
 
 
