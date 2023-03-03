@@ -113,6 +113,8 @@ class NHLScreen(SampleBase):
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
 
+        return offscreen_canvas
+
     # corner
     def getScoreboardScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
