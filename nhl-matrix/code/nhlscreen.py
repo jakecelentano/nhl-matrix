@@ -13,17 +13,19 @@ from PIL import Image
 class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
-        self.color = graphics.Color(255, 255, 255)
-        self.team = None
         self.nhl = NHL(str(datetime.datetime.now().year))
+        self.team = self.nhl.get_team_by_name(DEFAULT_TEAM)
+        team_primary_color = self.team.get_primary_color()
+        self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
     # main function
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         nhl = NHL(str(datetime.datetime.now().year))
-        self.team = nhl.get_team_by_name(DEFAULT_TEAM)
+        self.team = nhl.get_team_by_name("Pittsburgh Penguins")
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
+        
 
 
         offscreen_canvas = self.getUpcomingGameScreen()
@@ -48,7 +50,7 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGameScreen(self):
+    def getUpcomingGameScreen(self, team=None):
         color = self.color
         team = self.team
         offscreen_canvas = self.matrix.CreateFrameCanvas()
@@ -75,7 +77,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+38, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+24, y+24, color, "vs")
+        graphics.DrawText(offscreen_canvas, font, x+28, y+20, graphics.Color(255, 255, 255), "vs")
 
         #game_time = game.get_game_time()
         #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
