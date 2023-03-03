@@ -109,6 +109,7 @@ class NHLScreen(SampleBase):
         print("Game date: " + game_date) 
         if game_date == current_date:
             game_day_of_week = "Today"
+            print(game_time.split(":")[0])
             if int(game_time.split(":")[0]) >= 18:
                 game_day_of_week = "Tonight"
 
