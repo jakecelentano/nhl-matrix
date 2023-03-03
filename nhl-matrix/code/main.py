@@ -9,8 +9,7 @@ from PIL import Image
 import datetime
 from config import TEAMS
 from nhlscreen import NHLScreen
-
-
+from samplebase import SampleBase
 
 
 class GamesTracker(SampleBase):

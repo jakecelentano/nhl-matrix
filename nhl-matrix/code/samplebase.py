@@ -37,9 +37,6 @@ class SampleBase(object):
     def run(self):
         print("Running")
 
-    def get_matrix(self):
-        return self.matrix
-
     def process(self):
         print("Processing")
         self.args = self.parser.parse_args()

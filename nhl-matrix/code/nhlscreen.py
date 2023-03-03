@@ -13,7 +13,7 @@ from config import DEFAULT_FONT, DEFAULT_FONT_COLOR, DEFAULT_TEAM
 class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
-        self.matrix = super().get_matrix()
+        self.matrix = ""
         self.nhl = NHL(str(datetime.datetime.now().year))
 
 
@@ -63,4 +63,14 @@ class NHLScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, self.color)
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, self.color)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+
+
+# Main function
+if __name__ == "__main__":
+    screen = NHLScreen()
+    if (not screen.process()):
+        print("Error processing arguments")
+        screen.print_help()
+    
+
 
