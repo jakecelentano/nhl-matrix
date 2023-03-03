@@ -17,17 +17,21 @@ class Jake(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         nhl = NHL(str(datetime.datetime.now().year))
         team = nhl.get_team_by_name(DEFAULT_TEAM)
-        font = graphics.Font()
-        font.LoadFont("fonts/4x6.bdf")
+        team_primary_color = team.get_primary_color()
+        color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
+        while True:
+            self.drawBorder(color)
+            time.sleep(5)
+
+    
+    def drawBorder(self, color):
+        offscreen_canvas = self.matrix.CreateFrameCanvas()
         color = graphics.Color(255, 255, 255)
         graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
         graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
         graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-
-        while True:
-            offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
 
 # Main function
