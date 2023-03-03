@@ -157,7 +157,7 @@ class NHLScreen(SampleBase):
 
         # draw day of week
         font.LoadFont("fonts/5x8.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+30, y+6, graphics.Color(255, 255, 255), "Tonight")
+        graphics.DrawText(offscreen_canvas, font, x+28, y+6, graphics.Color(255, 255, 255), "Tonight")
         # draw @ time
         font.LoadFont("fonts/6x9.bdf")
         graphics.DrawText(offscreen_canvas, font, x+32, y+14, graphics.Color(255, 255, 255), "10:00")
