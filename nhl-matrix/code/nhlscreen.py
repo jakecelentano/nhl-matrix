@@ -120,12 +120,12 @@ class NHLScreen(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
         
-        
-        x, y = 1, 1
+        self.drawBorder(offscreen_canvas)   
+        x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
         away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
 
-        LOGO_SIZE = 30
+        LOGO_SIZE = 28
         home_team_logo = home_team.get_logo()
         home_team_logo = Image.open(home_team_logo)
         home_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
