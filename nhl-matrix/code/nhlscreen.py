@@ -23,7 +23,6 @@ class NHLScreen(SampleBase):
     def run(self):
         # start
         team = self.args.team
-        screen = self.args.screen
         self.team = self.nhl.get_team_by_name(team)
         if self.team is None:
             print("Team not found: " + team)
