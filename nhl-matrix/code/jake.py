@@ -19,10 +19,11 @@ class Jake(SampleBase):
         team = nhl.get_team_by_name(DEFAULT_TEAM)
         font = graphics.Font()
         font.LoadFont("fonts/4x6.bdf")
-        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, self.color)
-        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, self.color)
-        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, self.color)
-        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, self.color)
+        color = graphics.Color(255, 255, 255)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
+        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
+        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
         while True:
