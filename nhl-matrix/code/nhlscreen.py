@@ -154,8 +154,8 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+36, y+40, graphics.Color(255, 255, 255), "0")
 
         # write period and time
-        font.LoadFont("fonts/6x10.bdf")
-        graphics.DrawText(offscreen_canvas, font, x, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
+        font.LoadFont("fonts/texgyre-27.bdf")
+        graphics.DrawText(offscreen_canvas, font, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
         graphics.DrawText(offscreen_canvas, font, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
 
  
