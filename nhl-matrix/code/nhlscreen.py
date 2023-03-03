@@ -121,7 +121,7 @@ class NHLScreen(SampleBase):
         font = graphics.Font()
         
         self.drawBorder(offscreen_canvas)   
-        x, y = 2, 2
+        x, y = 2, 1
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
         away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
 
