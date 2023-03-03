@@ -148,6 +148,16 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(test_logo, x, y)
         offscreen_canvas.SetImage(test_logo2, x, y+24)
 
+        # write score
+        font.LoadFont("fonts/5x8.bdf")
+        graphics.DrawText(offscreen_canvas, font, x+32, y+8, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font, x+32, y+32, graphics.Color(255, 255, 255), "0")
+
+        # write period and time
+        font.LoadFont("fonts/4x6.bdf")
+        graphics.DrawText(offscreen_canvas, font, x+32, y+16, graphics.Color(255, 255, 255), "1st")
+        graphics.DrawText(offscreen_canvas, font, x+32, y+40, graphics.Color(255, 255, 255), "20:00")
+
  
 
 
