@@ -70,7 +70,7 @@ class SampleBase(object):
           options.disable_hardware_pulsing = True
         if not self.args.drop_privileges:
           options.drop_privileges=False
-
+        print("Setting up matrix")
         self.matrix = RGBMatrix(options = options)
 
         try:
