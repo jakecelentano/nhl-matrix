@@ -127,18 +127,18 @@ class NHLScreen(SampleBase):
 
         home_team_logo = home_team.get_logo()
         home_team_logo = Image.open(home_team_logo)
-        home_team_logo.thumbnail((56, 56), Image.ANTIALIAS)
+        home_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
         home_team_logo = home_team_logo.convert('RGB')
 
         away_team_logo = away_team.get_logo()
         away_team_logo = Image.open(away_team_logo)
-        away_team_logo.thumbnail((56, 56), Image.ANTIALIAS)
+        away_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
 
         
 
-        offscreen_canvas.SetImage(home_team_logo, x-30, y)
-        offscreen_canvas.SetImage(home_team_logo, x+30, y)
+        offscreen_canvas.SetImage(home_team_logo, x-30, y-20)
+        offscreen_canvas.SetImage(home_team_logo, x+30, y-20)
 
         return offscreen_canvas
     
