@@ -17,7 +17,7 @@ class Jake(SampleBase):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         nhl = NHL(str(datetime.datetime.now().year))
         team = nhl.get_team_by_name(DEFAULT_TEAM)
-        team_primary_color = graphics.Color(team.get_primary_color())
+        team_primary_color = team.get_primary_color()
         print(team_primary_color)
         color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
         while True:
