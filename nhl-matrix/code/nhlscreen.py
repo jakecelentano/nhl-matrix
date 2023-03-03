@@ -13,10 +13,13 @@ from PIL import Image
 class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(NHLScreen, self).__init__(*args, **kwargs)
-        self.nhl = NHL(str(datetime.datetime.now().year))
-        self.team = self.nhl.get_team_by_name(DEFAULT_TEAM)
+        self.parser.add_argument("-t", "--team", help="The team to display", default=DEFAULT_TEAM)
+        self.team_name = self.args.team
+        self.team = self.nhl.get_team_by_name(self.team_name)
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
+
+        self.nhl = NHL(str(datetime.datetime.now().year))
 
     # main function
     def run(self):
