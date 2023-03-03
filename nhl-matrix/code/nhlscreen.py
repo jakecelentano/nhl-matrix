@@ -21,7 +21,8 @@ class NHLScreen(SampleBase):
 
     # main function
     def run(self):
-
+        print(self.args)
+        return
         # start
         self.team = self.nhl.get_team_by_name(self.args.team)
         team_primary_color = self.team.get_primary_color()
