@@ -156,9 +156,9 @@ class NHLScreen(SampleBase):
                 game_day_of_week = "Tonight"
 
         # draw day of week
-        graphics.DrawText(offscreen_canvas, font, x+30, y, graphics.Color(255, 255, 255), "Wednesday")
+        graphics.DrawText(offscreen_canvas, font, x+30, y+6, graphics.Color(255, 255, 255), "Wednesday")
         # draw @ time
-        graphics.DrawText(offscreen_canvas, font, x+30, y+5, graphics.Color(255, 255, 255), "@ " + game_time)
+        graphics.DrawText(offscreen_canvas, font, x+30, y+12, graphics.Color(255, 255, 255), "10:00 PM")
 
 
 
