@@ -46,6 +46,25 @@ class Game(object):
     
     def get_game_date(self):
         return self.get_game_datetime_string().split(" ")[0]
+    
+    def get_game_day(self):
+        date  = str(self.get_game_date())
+        return date.split("-")[2]
+    
+    def get_game_month(self):
+        date  = str(self.get_game_date())
+        return date.split("-")[1]
+       
+    def get_game_year(self):
+        date  = str(self.get_game_date())
+        return date.split("-")[0]
+
+    def get_game_day_of_week(self):
+        date  = str(self.get_game_date())
+        return datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%A")
+
+
+
 
     def get_game_date_prety(self):
         date  = str(self.get_game_date())

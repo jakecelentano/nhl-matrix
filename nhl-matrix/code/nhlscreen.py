@@ -84,11 +84,19 @@ class NHLScreen(SampleBase):
         # draw vs between logos
         graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "vs")
 
-        #game_time = game.get_game_time()
-        #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-        #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-        #y += 30
+        game_time = game.get_game_time_pretty()
+        game_day_of_week = game.get_game_day_of_week()
+        game_month = game.get_game_month()
+        game_day = game.get_game_day()
+
+        # draw day of week
+        graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), game_day_of_week)
+        # draw month / day @ time
+        graphics.DrawText(offscreen_canvas, font, x+2, y+50, graphics.Color(255, 255, 255), game_month + " " + game_day + " @ " + game_time)
         
+        
+
+
         return offscreen_canvas
         
         
