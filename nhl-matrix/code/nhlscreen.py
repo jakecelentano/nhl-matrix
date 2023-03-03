@@ -121,7 +121,7 @@ class NHLScreen(SampleBase):
     def getAltUpcomingGameScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
-        font.LoadFont("fonts/4x6.bdf")
+        font.LoadFont("fonts/6x9.bdf")
         
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -156,9 +156,9 @@ class NHLScreen(SampleBase):
                 game_day_of_week = "Tonight"
 
         # draw day of week
-        graphics.DrawText(offscreen_canvas, font, x+30, y+6, graphics.Color(255, 255, 255), "Wednesday")
+        graphics.DrawText(offscreen_canvas, font, x+30, y+6, graphics.Color(255, 255, 255), "Tonight")
         # draw @ time
-        graphics.DrawText(offscreen_canvas, font, x+30, y+12, graphics.Color(255, 255, 255), "10:00 PM")
+        graphics.DrawText(offscreen_canvas, font, x+30, y+12, graphics.Color(255, 255, 255), "10:00")
 
 
 
