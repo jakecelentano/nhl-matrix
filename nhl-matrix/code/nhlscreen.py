@@ -119,10 +119,9 @@ class NHLScreen(SampleBase):
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
 
-    # vertical logos
+    # corner
     def getAltUpcomingGameScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        self.drawBorder(offscreen_canvas)
         font = graphics.Font()
         font.LoadFont("fonts/4x6.bdf")
         
@@ -144,8 +143,8 @@ class NHLScreen(SampleBase):
 
 
         # paste logos onto canvas in top left and bottom right
-        offscreen_canvas.SetImage(home_team_logo, x-20, y-20)
-        offscreen_canvas.SetImage(away_team_logo, x+20, y+20)
+        offscreen_canvas.SetImage(home_team_logo, x-12, y-12)
+        offscreen_canvas.SetImage(away_team_logo, x+28, y+28)
         
 
 
