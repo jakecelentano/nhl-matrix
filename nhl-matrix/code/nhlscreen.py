@@ -65,10 +65,10 @@ class NHLScreen(SampleBase):
         away_team_logo = away_team.get_logo()
         # convert to 30x30 PIL images in RGB
         home_team_logo = Image.open(home_team_logo)
-        home_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
+        home_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
         home_team_logo = home_team_logo.convert('RGB')
         away_team_logo = Image.open(away_team_logo)
-        away_team_logo.thumbnail((30, 30), Image.ANTIALIAS)
+        away_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
         # paste logos onto canvas
         offscreen_canvas.SetImage(home_team_logo, x, y)
@@ -77,10 +77,10 @@ class NHLScreen(SampleBase):
         # draw vs between logos
         graphics.DrawText(offscreen_canvas, font, x+15, y+30, color, "vs")
 
-        game_time = game.get_game_time()
-        graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-        graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
-        y += 30
+        #game_time = game.get_game_time()
+        #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
+        #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
+        #y += 30
         
         return offscreen_canvas
         
