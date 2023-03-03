@@ -46,12 +46,12 @@ class NHLScreen():
             offscreen_canvas.SetImage(home_team_logo, x, y)
             offscreen_canvas.SetImage(away_team_logo, x+30, y)
             # draw team names
-            graphics.DrawText(offscreen_canvas, self.font, x, y+30, team_color, home_team.get_name())
-            graphics.DrawText(offscreen_canvas, self.font, x+30, y+30, team_color, away_team.get_name())
+            graphics.DrawText(offscreen_canvas, font, x, y+30, team_color, home_team.get_name())
+            graphics.DrawText(offscreen_canvas, font, x+30, y+30, team_color, away_team.get_name())
             # draw game time
             game_time = game.get_game_time()
             game_time = game_time.strftime("%I:%M %p")
-            graphics.DrawText(offscreen_canvas, self.font, x, y+45, team_color, game_time)
+            graphics.DrawText(offscreen_canvas, font, x, y+45, team_color, game_time)
             y += 30
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
