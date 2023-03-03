@@ -136,10 +136,10 @@ class NHLScreen(SampleBase):
         away_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
 
-        test_logo = Image.open("logos/test.png")
+        test_logo = Image.open("logos/1.png")
         test_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         test_logo = test_logo.convert('RGB')
-        test_logo2 = Image.open("logos/test2.png")
+        test_logo2 = Image.open("logos/2.png")
         test_logo2.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         test_logo2 = test_logo.convert('RGB')
 
