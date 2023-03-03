@@ -121,7 +121,7 @@ class NHLScreen(SampleBase):
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")
         font2 = graphics.Font()
-        font2.LoadFont("fonts/5x9.bdf")
+        font2.LoadFont("fonts/6x9.bdf")
         
         self.drawBorder(offscreen_canvas)   
         x, y = 1, 1
