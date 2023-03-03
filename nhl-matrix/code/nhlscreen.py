@@ -38,7 +38,6 @@ class NHLScreen(SampleBase):
 
         # draw the upcoming game screen
         offscreen_canvas = self.getUpcomingGameScreen(game)
-        offscreen_canvas = self.getScoreboardScreen(game)
         print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         
