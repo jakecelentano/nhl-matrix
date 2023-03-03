@@ -139,17 +139,9 @@ class NHLScreen(SampleBase):
         away_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
 
-        test_logo = Image.open("logos/1.png")
-        test_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
-        test_logo = test_logo.convert('RGB')
-        test_logo2 = Image.open("logos/2.png")
-        test_logo2.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
-        test_logo2 = test_logo2.convert('RGB')
-
-        
-
-        offscreen_canvas.SetImage(test_logo, x, y)
-        offscreen_canvas.SetImage(test_logo2, x, y+24)
+        # paste logos onto canvas
+        offscreen_canvas.SetImage(home_team_logo, x, y)
+        offscreen_canvas.SetImage(away_team_logo, x, y+24)
 
         # write score
 
