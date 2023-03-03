@@ -6,15 +6,15 @@ from team import Team
 from PIL import Image
 import datetime
 from config import DEFAULT_FONT, DEFAULT_FONT_COLOR, DEFAULT_TEAM
+from matrix import MATRIX
 
 
 
 
-class NHLScreen(SampleBase):
-    def __init__(self, *args, **kwargs):
-        super(NHLScreen, self).__init__(*args, **kwargs)
+class NHLScreen():
+    def __init__(self):
         self.nhl = NHL(str(datetime.datetime.now().year))
-
+        self.matrix = MATRIX
 
         
     def drawUpcomingGamesScreen(self, team):
@@ -28,7 +28,6 @@ class NHLScreen(SampleBase):
         
 
         games = team.get_next_games(2)
-        team 
 
         for game in games:
             home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -64,12 +63,8 @@ class NHLScreen(SampleBase):
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
 
-# Main function
-if __name__ == "__main__":
-    screen = NHLScreen()
-    if (not screen.process()):
-        print("Error processing arguments")
-        screen.print_help()
+
+
     
 
 
