@@ -15,6 +15,8 @@ class NHLScreen(SampleBase):
         super(NHLScreen, self).__init__(*args, **kwargs)
         self.parser.add_argument("-t", "--team", help="The team to display", default=DEFAULT_TEAM)
         self.nhl = NHL(str(datetime.datetime.now().year))
+        self.team = "Boston Bruins"
+        self.color = graphics.Color(255, 255, 255)
 
 
     # main function
