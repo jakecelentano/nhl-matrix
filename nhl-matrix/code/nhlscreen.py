@@ -149,12 +149,12 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(test_logo2, x, y+24)
 
         # write score
-        font.LoadFont("fonts/10x20.bdf")
+        font.LoadFont("fonts/texgyre-27.bdf")
         graphics.DrawText(offscreen_canvas, font, x+36, y+20, graphics.Color(255, 255, 255), "0")
         graphics.DrawText(offscreen_canvas, font, x+36, y+40, graphics.Color(255, 255, 255), "0")
 
         # write period and time
-        font.LoadFont("fonts/texgyre-27.bdf")
+        font.LoadFont("fonts/10x20.bdf")
         graphics.DrawText(offscreen_canvas, font, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
         graphics.DrawText(offscreen_canvas, font, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
 
