@@ -131,8 +131,8 @@ class NHLScreen(SampleBase):
         away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
 
         # convert logos to 30x30 PIL images in RGB
-        home_team_logo = Image.open(home_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
-        away_team_logo = Image.open(away_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).covert('RGB')
+        home_team_logo = Image.open(home_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).convert('RGB')
+        away_team_logo = Image.open(away_team.get_logo()).thumbnail((24, 24), Image.ANTIALIAS).convert('RGB')
 
         # paste logos onto canvas
         offscreen_canvas.SetImage(home_team_logo, x, y)
