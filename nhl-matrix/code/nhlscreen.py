@@ -129,20 +129,20 @@ class NHLScreen(SampleBase):
 
         home_team_logo = home_team.get_logo()
         home_team_logo = Image.open(home_team_logo)
-        home_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
+        home_team_logo.thumbnail((56, 56), Image.ANTIALIAS)
         home_team_logo = home_team_logo.convert('RGB')
 
         away_team_logo = away_team.get_logo()
         away_team_logo = Image.open(away_team_logo)
-        away_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
+        away_team_logo.thumbnail((56, 56), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
 
         
 
 
         # paste logos onto canvas in top left and bottom right
-        offscreen_canvas.SetImage(home_team_logo, x-12, y-12)
-        offscreen_canvas.SetImage(home_team_logo, x+24, y+24)
+        offscreen_canvas.SetImage(home_team_logo, x-18, y-18)
+        offscreen_canvas.SetImage(home_team_logo, x+30, y+30)
 
         #YYYY-MM-DD
         game_date =  game.get_game_date()
@@ -157,10 +157,10 @@ class NHLScreen(SampleBase):
 
         # draw day of week
         font.LoadFont("fonts/5x8.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+28, y+6, graphics.Color(255, 255, 255), "Tonight")
+        graphics.DrawText(offscreen_canvas, font, x+26, y+6, graphics.Color(255, 255, 255), "Tonight")
         # draw @ time
         font.LoadFont("fonts/6x9.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+32, y+14, graphics.Color(255, 255, 255), "10:00")
+        graphics.DrawText(offscreen_canvas, font, x+26, y+14, graphics.Color(255, 255, 255), "10:00 PM")
 
 
 
