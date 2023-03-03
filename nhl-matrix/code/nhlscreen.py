@@ -118,7 +118,10 @@ class NHLScreen(SampleBase):
     # corner
     def getScoreboardScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        font = graphics.Font()
+        font1 = graphics.Font()
+        font1.LoadFont("fonts/texgyre-27.bdf")
+        font2 = graphics.Font()
+        font2.LoadFont("fonts/10x20.bdf")
         
         self.drawBorder(offscreen_canvas)   
         x, y = 1, 1
@@ -149,14 +152,14 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(test_logo2, x, y+24)
 
         # write score
-        font.LoadFont("fonts/texgyre-27.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+36, y+20, graphics.Color(255, 255, 255), "0")
-        graphics.DrawText(offscreen_canvas, font, x+36, y+40, graphics.Color(255, 255, 255), "0")
+
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+20, graphics.Color(255, 255, 255), "0")
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+40, graphics.Color(255, 255, 255), "0")
 
         # write period and time
-        font.LoadFont("fonts/10x20.bdf")
-        graphics.DrawText(offscreen_canvas, font, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
-        graphics.DrawText(offscreen_canvas, font, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
+
+        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
+        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
 
  
 
