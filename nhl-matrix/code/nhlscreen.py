@@ -72,10 +72,10 @@ class NHLScreen(SampleBase):
         away_team_logo = away_team_logo.convert('RGB')
         # paste logos onto canvas
         offscreen_canvas.SetImage(home_team_logo, x, y)
-        offscreen_canvas.SetImage(away_team_logo, x+30, y)
+        offscreen_canvas.SetImage(away_team_logo, x+38, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+30, y+24, color, "vs")
+        graphics.DrawText(offscreen_canvas, font, x+24, y+24, color, "vs")
 
         #game_time = game.get_game_time()
         #graphics.DrawText(offscreen_canvas, font, x, y+30, color, game_time)
