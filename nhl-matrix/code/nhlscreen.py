@@ -97,7 +97,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+36, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+29, y+20, graphics.Color(255, 255, 255), "v") # 27 + 5 = 32 (offset + font width = center)
+        graphics.DrawText(offscreen_canvas, font, x+27, y+20, graphics.Color(255, 255, 255), "v") # 27 + 5 = 32 (offset + font width = center)
         
         #YYYY-MM-DD
         game_date =  game.get_game_date()
