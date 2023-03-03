@@ -132,27 +132,22 @@ class NHLScreen(SampleBase):
 
         home_team_logo = home_team.get_logo()
         home_team_logo = Image.open(home_team_logo)
-        home_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
+        home_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
         home_team_logo = home_team_logo.convert('RGB')
 
         away_team_logo = away_team.get_logo()
         away_team_logo = Image.open(away_team_logo)
-        away_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
+        away_team_logo.thumbnail((48, 48), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
 
         
 
 
-        # paste logos onto canvas
+        # paste logos onto canvas in top left and bottom right
         offscreen_canvas.SetImage(home_team_logo, x, y)
-        offscreen_canvas.SetImage(away_team_logo, x, y+26)
+        offscreen_canvas.SetImage(away_team_logo, x+32, y+32)
+        
 
-        # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+26, y+26, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
-
-        # draw team names to the right of logos
-        graphics.DrawText(offscreen_canvas, font, x+28, y+8, graphics.Color(255, 255, 255), home_team.get_name())
-        graphics.DrawText(offscreen_canvas, font, x+28, y+44, graphics.Color(255, 255, 255), away_team.get_name())
 
 
         
