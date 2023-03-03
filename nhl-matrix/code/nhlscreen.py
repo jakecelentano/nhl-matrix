@@ -55,7 +55,7 @@ class NHLScreen(SampleBase):
                     offscreen_canvas = self.getUpcomingGameScreen(game)
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                 else:
-                    print("No new game")
+                    pass
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
                 break
@@ -95,7 +95,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+36, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "vs")
+        graphics.DrawText(offscreen_canvas, font, x+26, y+20, graphics.Color(255, 255, 255), "@ ")
 
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
