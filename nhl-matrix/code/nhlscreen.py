@@ -137,8 +137,8 @@ class NHLScreen(SampleBase):
 
         
 
-        offscreen_canvas.SetImage(home_team_logo, x, y)
-        offscreen_canvas.SetImage(home_team_logo, x+40, y)
+        offscreen_canvas.SetImage(home_team_logo, x-30, y)
+        offscreen_canvas.SetImage(home_team_logo, x+30, y)
 
         return offscreen_canvas
     
