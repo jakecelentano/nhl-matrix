@@ -106,8 +106,6 @@ class NHLScreen(SampleBase):
         game_time = game.get_game_time_pretty()
         game_day_of_week = game.get_game_day_of_week()
         current_date = self.getCurrentDate() # YYYY-MM-DD
-        print("Current date: " + current_date)
-        print("Game date: " + game_date) 
         if game_date == current_date:
             game_day_of_week = "Today"
             if int(game_time.split(":")[0]) >= 7: # if game is at 7pm or later
@@ -145,7 +143,22 @@ class NHLScreen(SampleBase):
         # paste logos onto canvas in top left and bottom right
         offscreen_canvas.SetImage(home_team_logo, x-12, y-12)
         offscreen_canvas.SetImage(home_team_logo, x+24, y+24)
-        
+
+        #YYYY-MM-DD
+        game_date =  game.get_game_date()
+        #HH:MM AM/PM
+        game_time = game.get_game_time_pretty()
+        game_day_of_week = game.get_game_day_of_week()
+        current_date = self.getCurrentDate() # YYYY-MM-DD
+        if game_date == current_date:
+            game_day_of_week = "Today"
+            if int(game_time.split(":")[0]) >= 7: # if game is at 7pm or later
+                game_day_of_week = "Tonight"
+
+        # draw day of week
+        graphics.DrawText(offscreen_canvas, font, x+30, y, graphics.Color(255, 255, 255), "Wednesday")
+        # draw @ time
+        graphics.DrawText(offscreen_canvas, font, x+30, y+5, graphics.Color(255, 255, 255), "@ " + game_time)
 
 
 
