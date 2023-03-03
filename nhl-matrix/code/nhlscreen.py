@@ -39,7 +39,7 @@ class NHLScreen(SampleBase):
         # draw the upcoming game screen
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         #offscreen_canvas = self.getUpcomingGameScreen(game)
-        offscreen_canvas = self.ggetAltUpcomingGameScreen(game)
+        offscreen_canvas = self.getAltUpcomingGameScreen(game)
         print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
         while True:
