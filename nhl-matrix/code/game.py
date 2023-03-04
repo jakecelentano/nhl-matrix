@@ -28,6 +28,10 @@ class Game(object):
     
     def get_game_status(self):
         return self.game_json['gameData']['status']['abstractGameState']
+    
+    def is_live(self):
+        return self.get_game_status().upper() == "LIVE"
+
 
     # YYYY-MM-DD HH:MM:SS as datetime object
     def get_game_datetime(self):
@@ -46,6 +50,9 @@ class Game(object):
             return dt - datetime.timedelta(hours=8)
         else:
             return dt
+        
+    def get_seconds_until_next_game(self):
+        return (self.get_game_datetime() - datetime.datetime.now()).total_seconds()
 
     # everything else is as a string, for convenience   
     # ex: 2019-10-21 19:00:00

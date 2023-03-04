@@ -31,30 +31,40 @@ class NHLScreen(SampleBase):
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
-        # get the next game
-        game = self.team.get_next_games(1)[0]
-        # get id of the next game
-        game_id = game.get_game_id()
+
+
+
 
         # draw the upcoming game screen
         offscreen_canvas = self.getUpcomingGameScreen(game)
         print("Drawing upcoming game screen")
         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
-        
+        sleep_time = 60
         while True:
-            time.sleep(1)
+            time.sleep(sleep_time)
             try:
-                # get the next game
+                # get the next game (will include games today, so live games will be included)
                 game = self.team.get_next_games(1)[0]
                 # get id of the next game
-                new_game_id = game.get_game_id()
-                if new_game_id != game_id:
-                    game_id = new_game_id
-                    # draw the new upcoming game screen
-                    offscreen_canvas = self.getUpcomingGameScreen(game)
-                    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+                game_id = game.get_game_id()
+                # check if game is live
+                isLive = game.is_live()
+                print(isLive)
+                if isLive:
+                    # draw the live game screen
+                    sleep_time = 5
+                    offscreen_canvas = self.getLiveGameScreen(game)
+                    print("Drawing live game screen")
+                # get the next game
                 else:
-                    pass
+                    # get how many seconds between now and the next game
+                    seconds_until_next_game = game.get_seconds_until_next_game()
+                    print("Seconds until next game: " + seconds_until_next_game)
+                    offscreen_canvas = self.getUpcomingGameScreen(game)
+                    print("Drawing upcoming game screen")  
+                    sleep_time = max(seconds_until_next_game-300, 60)
+
+                offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas) 
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
                 break
