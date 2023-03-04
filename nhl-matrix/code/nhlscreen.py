@@ -120,7 +120,7 @@ class NHLScreen(SampleBase):
         return offscreen_canvas
 
     # corner
-    def getScoreboardScreen(self, game):
+    def getLiveGameScreen(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")
