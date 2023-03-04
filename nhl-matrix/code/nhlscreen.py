@@ -32,7 +32,7 @@ class NHLScreen(SampleBase):
 
 
         # loop
-        sleep_time = 60
+        sleep_time = 1
         while True:
             time.sleep(sleep_time)
             try:
