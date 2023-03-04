@@ -148,14 +148,14 @@ class NHLScreen(SampleBase):
         away_team_logo = away_team_logo.convert('RGB')
 
         # paste logos onto canvas
-        offscreen_canvas.SetImage(home_team_logo, x, y)
-        offscreen_canvas.SetImage(away_team_logo, x, y+24)
+        offscreen_canvas.SetImage(home_team_logo, x, y+24)
+        offscreen_canvas.SetImage(away_team_logo, x, y)
 
         # write score
         home_score = game.get_home_score()
         away_score = game.get_away_score()
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(home_score))
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(away_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(away_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(home_score))
 
         # write period and time
         if game.get_status() == "Final":
