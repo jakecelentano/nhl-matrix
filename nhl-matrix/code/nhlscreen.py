@@ -152,8 +152,8 @@ class NHLScreen(SampleBase):
         away_team_logo = away_team_logo.convert('RGB')
 
         # paste logos onto canvas
-        offscreen_canvas.SetImage(home_team_logo, x, y+24)
-        offscreen_canvas.SetImage(away_team_logo, x, y)
+        offscreen_canvas.SetImage(home_team_logo, x+1, y+24)
+        offscreen_canvas.SetImage(away_team_logo, x+1, y)
 
         # write score
         home_score = game.get_home_score()
