@@ -39,10 +39,10 @@ class Game(object):
         away_score = self.game_json['liveData']['boxscore']['teams']['away']['teamStats']['teamSkaterStats']['goals']
         return away_score
     
-    def get_game_period(self):
+    def get_period(self):
         return self.game_json['liveData']['linescore']['currentPeriod']
     
-    def get_game_period_time(self):
+    def get_period_time(self):
         return self.game_json['liveData']['linescore']['currentPeriodTimeRemaining']
 
 
