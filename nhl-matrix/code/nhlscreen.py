@@ -42,7 +42,7 @@ class NHLScreen(SampleBase):
                 game_id = game.get_game_id()
                 print("Game ID: " + str(game_id))
                 # check if game is live
-                game_status = game.get_game_status()
+                game_status = game.get_status()
                 game_status == "Live"
                 print("Status:")
                 print(game_status)
