@@ -154,8 +154,8 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(home_score))
 
         # write period and time
-        period = game.get_period()
-        time = game.get_period_time()
+        period = str(game.get_period())
+        time = str(game.get_period_time())
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
         graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
 
