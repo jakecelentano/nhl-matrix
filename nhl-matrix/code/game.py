@@ -29,6 +29,21 @@ class Game(object):
     
     def is_live(self):
         return self.get_game_status().upper() == "LIVE"
+    
+
+    def get_home_score(self):
+        home_score = self.game_json['liveData']['boxscore']['teams']['home']['teamStats']['teamSkaterStats']['goals']
+        return home_score
+    
+    def get_away_score(self):
+        away_score = self.game_json['liveData']['boxscore']['teams']['away']['teamStats']['teamSkaterStats']['goals']
+        return away_score
+    
+    def get_game_period(self):
+        return self.game_json['liveData']['linescore']['currentPeriod']
+    
+    def get_game_period_time(self):
+        return self.game_json['liveData']['linescore']['currentPeriodTimeRemaining']
 
 
     # YYYY-MM-DD HH:MM:SS as datetime object

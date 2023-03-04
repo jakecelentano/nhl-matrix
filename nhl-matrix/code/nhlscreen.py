@@ -148,14 +148,16 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x, y+24)
 
         # write score
-
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), "0")
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), "0")
+        home_score = game.get_home_score()
+        away_score = game.get_away_score()
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(away_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(home_score))
 
         # write period and time
-
-        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "1st")
-        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), "20:00")
+        period = game.get_period()
+        time = game.get_period_time()
+        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
+        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
 
  
 
