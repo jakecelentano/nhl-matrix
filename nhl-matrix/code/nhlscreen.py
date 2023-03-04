@@ -27,18 +27,11 @@ class NHLScreen(SampleBase):
         if self.team is None:
             print("Team not found: " + team)
             return
-
         team_primary_color = self.team.get_primary_color()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
 
-
-
-
-        # draw the upcoming game screen
-        offscreen_canvas = self.getUpcomingGameScreen(game)
-        print("Drawing upcoming game screen")
-        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+        # loop
         sleep_time = 60
         while True:
             time.sleep(sleep_time)
@@ -71,13 +64,12 @@ class NHLScreen(SampleBase):
 
     
     def drawBorder(self, offscreen_canvas=None):
-        color = self.color
         if offscreen_canvas is None:
             offscreen_canvas = self.matrix.CreateFrameCanvas()
-        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
-        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
-        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
-        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, self.color)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, self.color)
+        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, self.color)
+        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, self.color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     def getUpcomingGameScreen(self, game):
