@@ -44,8 +44,12 @@ class NHLScreen(SampleBase):
                 game_status = game.get_status()
                 game_home_team = game.get_game_home_team_name()
                 game_away_team = game.get_game_away_team_name()
-                period = game.get_period()
-                period_time = game.get_period_time()
+                try:
+                    period = game.get_period()
+                    period_time = game.get_period_time()
+                except:
+                    period = "N/A"
+                    period_time = "N/A"
                 print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(period_time))
 
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
