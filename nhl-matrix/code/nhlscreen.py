@@ -173,11 +173,11 @@ class NHLScreen(SampleBase):
             elif period == "2":
                 period = "2nd"
             elif period == "3":
-                period = "3rd"'
+                period = "3rd"
             elif period == "4":
                 period = "OT"
             else:
-                period = ""
+                period = "?"
             time = str(game.get_period_time())
 
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
