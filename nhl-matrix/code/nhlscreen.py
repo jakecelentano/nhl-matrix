@@ -45,8 +45,8 @@ class NHLScreen(SampleBase):
                 game_home_team = game.get_game_home_team_name()
                 game_away_team = game.get_game_away_team_name()
                 period = game.get_period()
-                time = game.get_period_time()
-                print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(time))
+                period_time = game.get_period_time()
+                print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(period_time))
 
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
@@ -162,10 +162,10 @@ class NHLScreen(SampleBase):
         # write period and time
         if game.get_status() == "Final":
             period = "FINAL"
-            time = ""
+            period_time = ""
         elif game.get_status() == "Final/OT":
             period = "FINAL OT"
-            time = ""
+            period_time = ""
         else:
             period = str(game.get_period())
             if period == "0":
@@ -180,10 +180,10 @@ class NHLScreen(SampleBase):
                 period = "OT"
             else:
                 period = "?"
-            time = str(game.get_period_time())
+            period_time = str(game.get_period_time())
 
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
-        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
+        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period_time)
 
  
 
