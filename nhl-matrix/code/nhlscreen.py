@@ -48,7 +48,10 @@ class NHLScreen(SampleBase):
                 print(game_status)
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
-                    sleep_time = 5
+                    if game_status == "Live":
+                        sleep_time = 5
+                    else:
+                        sleep_time = 1800
                     offscreen_canvas = self.getLiveGameScreen(game)
                     print("Drawing live game screen")
                 # get the next game
@@ -157,8 +160,15 @@ class NHLScreen(SampleBase):
         # write period and time
         period = str(game.get_period())
         time = str(game.get_period_time())
-        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
-        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
+        if game.get_status() == "Final":
+            period = "F"
+            time = ""
+        elif game.get_status() == "Final/OT":
+            period = "F/OT"
+            time = ""
+        else:
+            graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
+            graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
 
  
 
