@@ -46,7 +46,7 @@ class NHLScreen(SampleBase):
                 game_away_team = game.get_game_away_team_name()
                 period = game.get_period()
                 time = game.get_period_time()
-                print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(time)
+                print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(time))
 
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
