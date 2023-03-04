@@ -159,15 +159,27 @@ class NHLScreen(SampleBase):
 
         # write period and time
         if game.get_status() == "Final":
-            period = "F"
+            period = "FINAL"
             time = ""
         elif game.get_status() == "Final/OT":
-            period = "F/OT"
+            period = "FINAL OT"
             time = ""
         else:
             period = str(game.get_period())
+            if period == "0":
+                period = "P"
+            elif period == "1":
+                period = "1st"
+            elif period == "2":
+                period = "2nd"
+            elif period == "3":
+                period = "3rd"'
+            elif period == "4":
+                period = "OT"
+            else:
+                period = ""
             time = str(game.get_period_time())
-            
+
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
         graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), time)
 
