@@ -40,7 +40,7 @@ class NHLScreen(SampleBase):
                 game = self.team.get_next_games(1)[0]
                 # get id of the next game
                 game_id = game.get_game_id()
-                print("Game ID: " + game_id)
+                print("Game ID: " + str(game_id))
                 # check if game is live
                 isLive = game.is_live()
                 print("Live: " +  isLive)
