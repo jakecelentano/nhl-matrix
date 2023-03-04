@@ -40,12 +40,9 @@ class NHLScreen(SampleBase):
                 game = self.team.get_next_games(1)[0]
                 # get id of the next game
                 game_id = game.get_game_id()
-                print("Game ID: " + str(game_id))
                 # check if game is live
                 game_status = game.get_status()
                 game_status == "Live"
-                print("Status:")
-                print(game_status)
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
                     if game_status == "Live":
@@ -53,7 +50,7 @@ class NHLScreen(SampleBase):
                     else:
                         sleep_time = 1800
                     offscreen_canvas = self.getLiveGameScreen(game)
-                    print("Drawing live game screen")
+                    
                 # get the next game
                 else:
                     # get how many seconds between now and the next game
