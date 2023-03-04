@@ -123,11 +123,18 @@ class NHLScreen(SampleBase):
             if int(game_time.split(":")[0]) >= 7: # if game is at 7pm or later
                 game_day_of_week = "Tonight"
 
-
         # draw day of week
         graphics.DrawText(offscreen_canvas, font, x+2, y+32, graphics.Color(255, 255, 255), game_day_of_week)
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
+
+        # draw abbrevations + win/loss record
+        home_wins = home_team.get_wins()
+        home_losses = home_team.get_losses()
+        away_wins = away_team.get_wins()
+        away_losses = away_team.get_losses()
+        graphics.DrawText(offscreen_canvas, font, x+2, y+50, graphics.Color(255, 255, 255), home_team.get_abbreviation() + ": " + str(home_wins) + "-" + str(home_losses))
+        graphics.DrawText(offscreen_canvas, font, x+38, y+56, graphics.Color(255, 255, 255), away_team.get_abbreviation() + ": "  + str(away_wins) + "-" + str(away_losses)
 
         return offscreen_canvas
 

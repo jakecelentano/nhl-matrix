@@ -80,6 +80,17 @@ class Team(object):
         team_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id)).json()
         return team_json
     
+    def get_team_stats_json(self):
+        team_stats_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.team_id)).json()
+        return team_stats_json
+
+    def get_wins(self):
+        return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['wins']
+    
+    def get_losses(self):
+        return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['losses']
+    
+    
     def get_team_colors(self):
         json_file = open('nhl_colors.json', 'r')
         json_data = json.load(json_file)
@@ -96,6 +107,19 @@ class Team(object):
 
     def get_name(self):
         return self.team_name
+    
+    def get_abbreviation(self):
+        return self.team_abbreviation
+    
+    def get_record(self):
+        json_file = open('nhl_standings.json', 'r')
+        json_data = json.load(json_file)
+        
+        for team in json_data['records']:
+            if team['team']['name'] == self.team_name:
+                return team['leagueRecord']['wins'], team['leagueRecord']['losses'], team['leagueRecord']['ot']
+        
+        return 0, 0, 0
     
 
 
