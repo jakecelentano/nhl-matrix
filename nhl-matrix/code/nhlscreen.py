@@ -134,7 +134,7 @@ class NHLScreen(SampleBase):
         away_wins = away_team.get_wins()
         away_losses = away_team.get_losses()
         graphics.DrawText(offscreen_canvas, font, x+2, y+50, graphics.Color(255, 255, 255), home_team.get_abbreviation() + ": " + str(home_wins) + "-" + str(home_losses))
-        graphics.DrawText(offscreen_canvas, font, x+38, y+56, graphics.Color(255, 255, 255), away_team.get_abbreviation() + ": "  + str(away_wins) + "-" + str(away_losses)
+        graphics.DrawText(offscreen_canvas, font, x+38, y+56, graphics.Color(255, 255, 255), away_team.get_abbreviation() + ": "  + str(away_wins) + "-" + str(away_losses))
 
         return offscreen_canvas
 
