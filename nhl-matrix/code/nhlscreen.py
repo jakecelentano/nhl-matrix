@@ -42,7 +42,8 @@ class NHLScreen(SampleBase):
                 game_id = game.get_game_id()
                 # check if game is live
                 game_status = game.get_status()
-                game_status == "Live"
+                print(str(game_id) + ": " + str(game.get_status()))
+
                 if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
                     if game_status == "Live":
