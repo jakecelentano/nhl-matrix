@@ -26,8 +26,6 @@ class Game(object):
     def get_game_link(self):
         return self.game_link
     
-    def get_game_status(self):
-        return self.game_json['gameData']['status']['abstractGameState']
     
     def is_live(self):
         return self.get_game_status().upper() == "LIVE"
@@ -113,7 +111,7 @@ class Game(object):
 
 
     def get_game_status(self):
-        return self.game_json['status']['abstractGameState']
+        return self.game_json['gameData']['status']['abstractGameState']
 
     def get_game_teams(self):
         return self.game_json['teams']
