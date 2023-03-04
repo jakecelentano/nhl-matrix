@@ -42,10 +42,11 @@ class NHLScreen(SampleBase):
                 game_id = game.get_game_id()
                 print("Game ID: " + str(game_id))
                 # check if game is live
-                isLive = game.is_live()
-                print("Live:")
-                print(isLive)
-                if isLive:
+                game_status = game.get_game_status()
+                game_status == "Live"
+                print("Status:")
+                print(game_status)
+                if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
                     # draw the live game screen
                     sleep_time = 5
                     offscreen_canvas = self.getLiveGameScreen(game)
@@ -54,7 +55,7 @@ class NHLScreen(SampleBase):
                 else:
                     # get how many seconds between now and the next game
                     seconds_until_next_game = game.get_seconds_until_next_game()
-                    print("Seconds until next game: " + seconds_until_next_game)
+                    print("Seconds until next game: " + str(seconds_until_next_game))
                     offscreen_canvas = self.getUpcomingGameScreen(game)
                     print("Drawing upcoming game screen")  
                     sleep_time = max(seconds_until_next_game-300, 60)
@@ -150,8 +151,8 @@ class NHLScreen(SampleBase):
         # write score
         home_score = game.get_home_score()
         away_score = game.get_away_score()
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(away_score))
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(home_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(home_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(away_score))
 
         # write period and time
         period = str(game.get_period())
