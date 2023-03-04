@@ -52,8 +52,10 @@ class NHLScreen(SampleBase):
                     # draw the live game screen
                     if game_status == "Live":
                         sleep_time = 5
-                    else:
+                    elif game_status == "Final":
                         sleep_time = 1800
+                    else:
+                        sleep_time = 60
                     offscreen_canvas = self.getLiveGameScreen(game)
                     
                 # get the next game
