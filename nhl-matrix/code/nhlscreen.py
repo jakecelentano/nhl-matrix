@@ -145,9 +145,9 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10+font_width*len(str(home_wins)), y+50, graphics.Color(255, 255, 255), "-")
         graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10+font_width*len(str(home_wins))+font_width, y+50, graphics.Color(255, 0, 0), str(home_losses))
 
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+5, y+58, graphics.Color(0, 255, 0), str(away_wins))
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+5+font_width*len(str(away_wins)), y+58, graphics.Color(255, 255, 255), "-")
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+5+font_width*len(str(away_wins))+font_width, y+58, graphics.Color(255, 0, 0), str(away_losses))
+        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10, y+58, graphics.Color(0, 255, 0), str(away_wins))
+        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10+font_width*len(str(away_wins)), y+58, graphics.Color(255, 255, 255), "-")
+        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10+font_width*len(str(away_wins))+font_width, y+58, graphics.Color(255, 0, 0), str(away_losses))
 
       
 
