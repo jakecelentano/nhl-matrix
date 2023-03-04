@@ -43,7 +43,8 @@ class NHLScreen(SampleBase):
                 print("Game ID: " + str(game_id))
                 # check if game is live
                 isLive = game.is_live()
-                print("Live: " +  isLive)
+                print("Live:")
+                print(isLive)
                 if isLive:
                     # draw the live game screen
                     sleep_time = 5
