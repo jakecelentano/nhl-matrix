@@ -144,8 +144,8 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.get_abbreviation() + ": " )
         graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.get_abbreviation() + ": " )
         # draw wins - losses - ot
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.get_abbreviation())+8, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.get_abbreviation())+8, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(10))
+        graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.get_abbreviation())+6, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
+        graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.get_abbreviation())+6, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(10))
 
 
 
