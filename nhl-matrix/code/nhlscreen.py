@@ -92,6 +92,7 @@ class NHLScreen(SampleBase):
         font = graphics.Font()
         font.LoadFont("fonts/5x8.bdf")
         font_width = 5
+        WHITE = graphics.Color(255, 255, 255)
         
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
@@ -111,7 +112,7 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+36, y)
 
         # draw vs between logos
-        graphics.DrawText(offscreen_canvas, font, x+27, y+16, graphics.Color(255, 255, 255), "@") # 27 + 5 = 32 (offset + font width = center)
+        graphics.DrawText(offscreen_canvas, font, x+27, y+16, WHITE, "@") # 27 + 5 = 32 (offset + font width = center)
         
         #YYYY-MM-DD
         game_date =  game.get_game_date()
@@ -125,29 +126,28 @@ class NHLScreen(SampleBase):
                 game_day_of_week = "Tonight"
 
         # draw day of week
-        graphics.DrawText(offscreen_canvas, font, x+2, y+32, graphics.Color(255, 255, 255), game_day_of_week)
+        graphics.DrawText(offscreen_canvas, font, x+2, y+32, WHITE, game_day_of_week)
         # draw @ time
-        graphics.DrawText(offscreen_canvas, font, x+2, y+40, graphics.Color(255, 255, 255), "@ " + game_time)
+        graphics.DrawText(offscreen_canvas, font, x+2, y+40, WHITE, "@ " + game_time)
 
         # draw abbrevations + win/loss record
         home_wins = home_team.get_wins()
         home_losses = home_team.get_losses()
+        home_ot = home_team.get_ot()
         away_wins = away_team.get_wins()
         away_losses = away_team.get_losses()
+        away_ot = away_team.get_ot()
         home_primary_color = home_team.get_primary_color()
         away_primary_color = away_team.get_primary_color()
         home_color = graphics.Color(home_primary_color[0], home_primary_color[1], home_primary_color[2])
         away_color = graphics.Color(away_primary_color[0], away_primary_color[1], away_primary_color[2])
         graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.get_abbreviation() + ": " )
         graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.get_abbreviation() + ": " )
-        # draw wins in green, dash in white, losses in red
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10, y+50, graphics.Color(0, 255, 0), str(home_wins))
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10+font_width*len(str(home_wins)), y+50, graphics.Color(255, 255, 255), "-")
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10+font_width*len(str(home_wins))+font_width, y+50, graphics.Color(255, 0, 0), str(home_losses))
+        # draw wins - losses - ot
+        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(home_team.get_abbreviation())+10, y+50, home_color, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
+        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10, y+58, away_color, str(away_wins) + "-" + str(away_losses) + "-" + str(away_ot))
 
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10, y+58, graphics.Color(0, 255, 0), str(away_wins))
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10+font_width*len(str(away_wins)), y+58, graphics.Color(255, 255, 255), "-")
-        graphics.DrawText(offscreen_canvas, font, x+2+font_width*len(away_team.get_abbreviation())+10+font_width*len(str(away_wins))+font_width, y+58, graphics.Color(255, 0, 0), str(away_losses))
+
 
       
 
@@ -184,8 +184,8 @@ class NHLScreen(SampleBase):
         # write score
         home_score = game.get_home_score()
         away_score = game.get_away_score()
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, graphics.Color(255, 255, 255), str(away_score))
-        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, graphics.Color(255, 255, 255), str(home_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+22, WHITE, str(away_score))
+        graphics.DrawText(offscreen_canvas, font1, x+36, y+46, WHITE, str(home_score))
 
         # write period and time
         if game.get_status() == "Final":
@@ -210,8 +210,8 @@ class NHLScreen(SampleBase):
                 period = "?"
             period_time = str(game.get_period_time())
 
-        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period)
-        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, graphics.Color(255, 255, 255), period_time)
+        graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, WHITE, period)
+        graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, WHITE, period_time)
 
  
 

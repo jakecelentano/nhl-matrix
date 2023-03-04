@@ -89,6 +89,9 @@ class Team(object):
     
     def get_losses(self):
         return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['losses']
+
+    def get_ot(self):
+        return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['ot']
     
     
     def get_team_colors(self):
