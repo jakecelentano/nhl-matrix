@@ -124,6 +124,12 @@ class NHLScreen(SampleBase):
             if int(game_time.split(":")[0]) >= 7: # if game is at 7pm or later
                 game_day_of_week = "Tonight"
 
+        tomorrow = datetime.timedelta(days=1) + datetime.datetime.now()
+        tomorrow = tomorrow.strftime("%Y-%m-%d")
+        if game_date == tomorrow:
+            game_day_of_week = "Tomorrow"
+        
+
         # draw day of week
         graphics.DrawText(offscreen_canvas, font, x+2, y+32, WHITE, game_day_of_week)
         # draw @ time
