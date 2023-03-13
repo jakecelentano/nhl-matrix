@@ -8,7 +8,7 @@ import datetime
 from config import DEFAULT_TEAM
 from PIL import Image
 
-
+WHITE = graphics.Color(255, 255, 255)
 
 class NHLScreen(SampleBase):
     def __init__(self, *args, **kwargs):
@@ -92,7 +92,6 @@ class NHLScreen(SampleBase):
         font = graphics.Font()
         font.LoadFont("fonts/5x8.bdf")
         font_width = 5
-        WHITE = graphics.Color(255, 255, 255)
         
         x, y = 2, 2
         home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
