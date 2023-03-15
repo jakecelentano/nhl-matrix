@@ -69,7 +69,7 @@ class NHLScreen(SampleBase):
                     print("Seconds until next game: " + str(seconds_until_next_game))
                     offscreen_canvas = self.getUpcomingGameScreen(game)
                     print("Drawing upcoming game screen")  
-                    sleep_time = min(seconds_until_next_game-300, 7200)
+                    sleep_time = min(abs(seconds_until_next_game-300), 3600)
 
                 offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas) 
             except KeyboardInterrupt:
