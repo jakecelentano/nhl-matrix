@@ -39,9 +39,7 @@ class Team(object):
 
     def get_schedule(self, start_date, end_date):
         games = []
-        print('https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id))
         schedule_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id), headers=self.headers).json()
-        print(schedule_json)
         for date in schedule_json['dates']:
             for game in date['games']:
                 games.append(Game(game['gamePk'], game['link']))
@@ -58,6 +56,7 @@ class Team(object):
             end_date = (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d")
             games = self.get_schedule(start_date, end_date)
             num = len(games)
+        print(games[:num_games])
         return games[:num_games]
     
 
