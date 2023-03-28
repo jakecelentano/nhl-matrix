@@ -37,12 +37,9 @@ class NHLScreen(SampleBase):
             time.sleep(sleep_time)
             try:
                 # get the next game (will include games today, so live games will be included)
-                print(self.team)
                 game = self.team.get_next_games(1)[0]
-                print(game)
                 # get id of the next game
                 game_id = game.get_game_id()
-                print(game_id)
                 # check if game is live
                 game_status = game.get_status()
                 game_home_team = game.get_game_home_team_name()

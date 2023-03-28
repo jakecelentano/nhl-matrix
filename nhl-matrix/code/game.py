@@ -15,9 +15,11 @@ class Game(object):
     def get_game_json(self):
         result = ""
         try:
+            self.headers = DEFAULT_HEADERS
             result = requests.get(url=self.game_link, headers=self.headers).json()
         except:
-            print("Error")
+            print("Error getting game json")
+            
         return result
 
     # ex: 2022020917

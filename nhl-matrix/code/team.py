@@ -56,7 +56,6 @@ class Team(object):
             end_date = (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d")
             games = self.get_schedule(start_date, end_date)
             num = len(games)
-        print(games[:num_games])
         return games[:num_games]
     
 
