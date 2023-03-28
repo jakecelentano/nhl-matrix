@@ -1,6 +1,7 @@
 import requests
 from config import STATS_API_PREFIX, OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE, DEFAULT_HEADERS
 import datetime
+import time
 
 class Game(object):
     def __init__(self, game_id, game_link):
@@ -50,6 +51,7 @@ class Game(object):
     # YYYY-MM-DD HH:MM:SS as datetime object
     def get_game_datetime(self):
         dt = datetime.datetime.strptime(self.game_json['gameData']['datetime']['dateTime'], "%Y-%m-%dT%H:%M:%SZ")
+        self.time_zone = self.get_time_zone()
         if self.time_zone == "UTC":
             return dt
         elif self.time_zone == "EST":
@@ -152,10 +154,13 @@ class Game(object):
 
     def get_time_zone(self):
         if OBSERVE_DAYLIGHT_SAVINGS:
-            if datetime.datetime.now().dst():
+            if time.daylight:
                 return DST_TIMEZONE
             else:
                 return STANDARD_TIMEZONE
         else:
             return STANDARD_TIMEZONE
+        
+
+
 
