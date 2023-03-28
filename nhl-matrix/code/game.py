@@ -1,5 +1,5 @@
 import requests
-from config import STATS_API_PREFIX, OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE
+from config import STATS_API_PREFIX, OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE, DEFAULT_HEADERS
 import datetime
 
 class Game(object):
@@ -7,13 +7,14 @@ class Game(object):
         self.game_id = game_id
         self.game_link = STATS_API_PREFIX + game_link
         self.game_json = self.get_game_json() 
-        self.time_zone = self.get_time_zone() 
+        self.time_zone = self.get_time_zone()
+        self.headers = DEFAULT_HEADERS
 
     # example in nhl_samples/game.json
     def get_game_json(self):
         result = ""
         try:
-            result = requests.get(self.game_link).json()
+            result = requests.get(url=self.game_link, headers=self.headers).json()
         except:
             print("Error")
         return result

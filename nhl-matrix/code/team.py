@@ -1,7 +1,7 @@
 import requests
 from player import Player
 from game import Game
-from config import STATS_API_PREFIX, LOGO_API_PREFIX
+from config import STATS_API_PREFIX, LOGO_API_PREFIX, DEFAULT_HEADERS
 import datetime
 import cairosvg
 import os
@@ -13,6 +13,7 @@ class Team(object):
         self.team_name = team_name
         self.team_abbreviation = team_abbreviation
         self.team_link = STATS_API_PREFIX + team_link
+        self.headers =  DEFAULT_HEADERS
 
     def __str__(self):
         return self.team_name
@@ -26,7 +27,7 @@ class Team(object):
 
     def get_roster(self):
         roster = []
-        roster_json = requests.get(self.team_link + '/roster').json()
+        roster_json = requests.get(url=self.team_link + '/roster', headers=self.headers).json()
         for player in roster_json['roster']:
             roster.append(Player(player['person']['id'], player['person']['fullName'], player['person']['link']))
         return roster
@@ -38,7 +39,7 @@ class Team(object):
 
     def get_schedule(self, start_date, end_date):
         games = []
-        schedule_json = requests.get('https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id)).json()
+        schedule_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id), headers=self.headers).json()
         for date in schedule_json['dates']:
             for game in date['games']:
                 games.append(Game(game['gamePk'], game['link']))
@@ -77,11 +78,11 @@ class Team(object):
     
     
     def get_team_json(self):
-        team_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id)).json()
+        team_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id), headers=self.headers).json()
         return team_json
     
     def get_team_stats_json(self):
-        team_stats_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.team_id)).json()
+        team_stats_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.team_id), headers=self.headers).json()
         return team_stats_json
 
     def get_wins(self):
