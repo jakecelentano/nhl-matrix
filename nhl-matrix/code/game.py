@@ -129,7 +129,6 @@ class Game(object):
 
 
     def get_status(self):
-        print(self.game_json)
         return self.game_json['gameData']['status']['abstractGameState']
 
     def get_game_teams(self):
