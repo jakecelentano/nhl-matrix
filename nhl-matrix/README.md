@@ -1,4 +1,5 @@
 Python bindings for RGB Matrix library
+(via https://github.com/hzeller/rpi-rgb-led-matrix)
 ======================================
 
 Building
