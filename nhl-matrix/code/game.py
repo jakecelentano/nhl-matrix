@@ -131,7 +131,13 @@ class Game(object):
 
 
     def get_status(self):
-        return self.game_json['gameData']['status']['abstractGameState']
+        try:
+            status = self.game_json['gameData']['status']['abstractGameState']
+        except:
+            status = "NULL"
+            print("Error getting game status")
+            print(self.game_json)
+        return status
 
     def get_game_teams(self):
         return self.game_json['teams']
