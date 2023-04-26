@@ -14,12 +14,17 @@ class Game(object):
     # example in nhl_samples/game.json
     def get_game_json(self):
         result = ""
-        try:
-            self.headers = DEFAULT_HEADERS
-            result = requests.get(url=self.game_link, headers=self.headers).json()
-        except:
-            print("Error getting game json")
-            
+        retries = 0
+
+        while not result and retries < 5:
+            try:
+                self.headers = DEFAULT_HEADERS
+                result = requests.get(url=self.game_link, headers=self.headers).json()
+            except:
+                print("Error getting game json")
+                retries += 1
+                time.sleep(10)
+           
         return result
 
     # ex: 2022020917

@@ -6,6 +6,7 @@ import datetime
 import cairosvg
 import os
 import json
+import time
 
 class Team(object):
     def __init__(self, team_id, team_name, team_abbreviation, team_link):
@@ -27,9 +28,18 @@ class Team(object):
 
     def get_roster(self):
         roster = []
-        roster_json = requests.get(url=self.team_link + '/roster', headers=self.headers).json()
-        for player in roster_json['roster']:
-            roster.append(Player(player['person']['id'], player['person']['fullName'], player['person']['link']))
+        retries = 0
+
+        while not roster and retries < 5:
+            try:
+                roster_json = requests.get(url=self.team_link + '/roster', headers=self.headers).json()
+                for player in roster_json['roster']:
+                    roster.append(Player(player['person']['id'], player['person']['fullName'], player['person']['link']))
+            except:
+                print("Couldn't get roster for {}".format(self.team_name))
+                retries += 1
+                time.sleep(10)
+
         return roster
 
     def player_by_name(self, name):
@@ -39,10 +49,17 @@ class Team(object):
 
     def get_schedule(self, start_date, end_date):
         games = []
-        schedule_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id), headers=self.headers).json()
-        for date in schedule_json['dates']:
-            for game in date['games']:
-                games.append(Game(game['gamePk'], game['link']))
+        retries = 0
+        while not games and retries < 5:
+            try:
+                schedule_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}&teamId={}'.format(start_date, end_date, self.team_id), headers=self.headers).json()
+                for date in schedule_json['dates']:
+                    for game in date['games']:
+                        games.append(Game(game['gamePk'], game['link']))
+            except:
+                print("Couldn't get schedule for {}".format(self.team_name))
+                retries += 1
+                time.sleep(10)
         return games
 
     def get_next_games(self, num_games=2):
@@ -78,12 +95,27 @@ class Team(object):
     
     
     def get_team_json(self):
-        team_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id), headers=self.headers).json()
-        return team_json
+        json = None
+        retries = 0
+        while not json and retries < 5:
+            try:
+                json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}'.format(self.team_id), headers=self.headers).json()
+            except:
+                print("Couldn't get team json for {}".format(self.team_name))
+                retries += 1
+                time.sleep(10)
+        return json
     
     def get_team_stats_json(self):
-        team_stats_json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.team_id), headers=self.headers).json()
-        return team_stats_json
+        json = None
+        retries = 0
+        while not json and retries < 5:
+            try:
+                json = requests.get(url='https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.team_id), headers=self.headers).json()
+            except:
+                print("Couldn't get team stats json for {}".format(self.team_name))
+                retries += 1
+                time.sleep(10)
 
     def get_wins(self):
         return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['wins']
