@@ -116,6 +116,7 @@ class Team(object):
                 print("Couldn't get team stats json for {}".format(self.team_name))
                 retries += 1
                 time.sleep(10)
+        return json
 
     def get_wins(self):
         return self.get_team_stats_json()['stats'][0]['splits'][0]['stat']['wins']
