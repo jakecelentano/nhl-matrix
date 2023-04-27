@@ -152,6 +152,7 @@ class TeamsScreen(SampleBase):
         # if playoff, draw series record
         if game.isPlayoff():
             game_number = game.getPlayoffSeriesGameNumber()
+            print("Game number: " + str(game_number))
             # get previous games
             previous_games = team.getPreviousGames(game_number-1)
             # get the ids for the next game teams & then for each of the previous games, see which team won based on the ids, & then print the team id that won
@@ -170,14 +171,14 @@ class TeamsScreen(SampleBase):
                 game_home_team_score = game.getHomeScore()
                 game_away_team_score = game.getAwayScore()
 
-            # check if the home team won
-            if game_home_team_score > game_away_team_score:
-                team_wins[game_home_team_id] += 1
-            # check if the away team won
-            elif game_home_team_score < game_away_team_score:
-                team_wins[game_away_team_id] += 1
-            else:
-                print("Game tied, no winner --  not possible in playoffs")
+                # check if the home team won
+                if game_home_team_score > game_away_team_score:
+                    team_wins[game_home_team_id] += 1
+                # check if the away team won
+                elif game_home_team_score < game_away_team_score:
+                    team_wins[game_away_team_id] += 1
+                else:
+                    print("Game tied, no winner --  not possible in playoffs")
 
             # get the number of wins for each team
             home_team_wins = team_wins[home_team_id]
