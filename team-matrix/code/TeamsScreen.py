@@ -154,36 +154,52 @@ class TeamsScreen(SampleBase):
             game_number = game.getPlayoffSeriesGameNumber()
             # get previous games
             previous_games = team.getPreviousGames(game_number-1)
-            next_game_home_team_id = game.getHomeTeamId()
-            next_game_away_team_id = game.getAwayTeamId()
-            next_game_home_team_abbr = self.nhl.getTeam(next_game_home_team_id).getAbbreviation()
-            next_game_away_team_abbr = self.nhl.getTeam(next_game_away_team_id).getAbbreviation()
-            next_game_home_team_wins = 0
-            next_game_away_team_wins = 0
-            for game in previous_games:
-                home_team_id = game.getHomeTeamId()
-                away_team_id = game.getAwayTeamId()
-                if home_team_id == next_game_home_team_id:
-                    if game.getHomeScore() > game.getAwayScore():
-                        next_game_home_team_wins += 1
-                
-                elif home_team_id == next_game_away_team_id:
-                    if game.getHomeScore() > game.getAwayScore():
-                        next_game_away_team_wins += 1
-                    else:
-                        next_game_home_team_wins += 1
+            # get the ids for the next game teams & then for each of the previous games, see which team won based on the ids, & then print the team id that won
+            home_team_id = game.getHomeTeamId()
+            away_team_id = game.getAwayTeamId()
 
-            if next_game_home_team_wins > next_game_away_team_wins:
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads ")
-                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(next_game_home_team_wins) + "-" + str(next_game_away_team_wins))
-            elif next_game_home_team_wins < next_game_away_team_wins:
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_away_team_abbr + " leads ")
-                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(next_game_away_team_wins) + "-" + str(next_game_home_team_wins))
+            # create a dictionary to store the number of wins for each team
+            team_wins = {}
+            team_wins[home_team_id] = 0
+            team_wins[away_team_id] = 0
+
+            # loop through the previous games and see which team won
+            for game in previous_games:
+                game_home_team_id = game.getHomeTeamId()
+                game_away_team_id = game.getAwayTeamId()
+                game_home_team_score = game.getHomeScore()
+                game_away_team_score = game.getAwayScore()
+
+            # check if the home team won
+            if game_home_team_score > game_away_team_score:
+                team_wins[game_home_team_id] += 1
+            # check if the away team won
+            elif game_home_team_score < game_away_team_score:
+                team_wins[game_away_team_id] += 1
+            else:
+                print("Game tied, no winner --  not possible in playoffs")
+
+            # get the number of wins for each team
+            home_team_wins = team_wins[home_team_id]
+            away_team_wins = team_wins[away_team_id]
+
+            # winning team is the team with the most wins
+            winning_team_id = home_team_id
+            winning_team_wins = home_team_wins
+            if away_team_wins > home_team_wins:
+                winning_team_id = away_team_id
+                winning_team_wins = away_team_wins
+            
+            winning_team_abbreviation = self.nhl.getTeam(winning_team_id).getAbbreviation()
+
+            if home_team_wins != away_team_wins:
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, winning_team_abbreviation + " leads")
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(home_team_wins) + "-" + str(away_team_wins))
             else: 
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(next_game_home_team_wins) + "-" + str(next_game_away_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(home_team_wins) + "-" + str(away_team_wins))
 
             
-
+        # if not playoff, draw record
         else:
             home_wins = home_team.getWins()
             home_losses = home_team.getLosses()
