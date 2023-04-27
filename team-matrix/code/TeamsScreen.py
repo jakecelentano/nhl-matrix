@@ -84,8 +84,8 @@ class TeamsScreen(SampleBase):
                     min_seconds_until_next_game = min(min_seconds_until_next_game, seconds_until_next_game)
                 
                 # sleep until the next game
-                print("Sleeping for " + str(min_seconds_until_next_game-60) + " seconds")
-                sleep_time = min_seconds_until_next_game-3600
+                print("Sleeping for " + str(abs(min_seconds_until_next_game-60)) + " seconds")
+                sleep_time = min(min_seconds_until_next_game, 3600)
                 
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
