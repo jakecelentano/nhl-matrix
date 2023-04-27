@@ -3,7 +3,6 @@ from config import OBSERVE_DAYLIGHT_SAVINGS, STANDARD_TIMEZONE, DST_TIMEZONE
 import datetime
 import time
 from game import Game
-from NHLTeam import NHLTeam
 
 class NHLGame(Game):
     def __init__(self, id, link):
