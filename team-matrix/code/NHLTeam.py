@@ -64,6 +64,15 @@ class NHLTeam(Team):
 
         # sort games by date, most recent first
         games.sort(key=lambda x: x.date, reverse=True)
+        # only return games that have been played
+        games = [game for game in games if game.datetime < datetime.datetime.now()]
+        while num < num_games:
+            days += 14
+            start_date = (datetime.datetime.now() - datetime.timedelta(days=days)).strftime("%Y-%m-%d")
+            games = self.getSchedule(start_date, end_date)
+            num = len(games)
+            games.sort(key=lambda x: x.date, reverse=True)
+            games = [game for game in games if game.date < datetime.datetime.now()]
 
         return games[:num_games]
     

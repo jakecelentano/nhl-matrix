@@ -169,11 +169,13 @@ class TeamsScreen(SampleBase):
                     next_game_away_team_wins += 1
 
             if next_game_home_team_wins > next_game_away_team_wins:
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads " + str(next_game_home_team_wins) + '-' + str(next_game_away_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads ")
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, + str(next_game_home_team_wins) + '-' + str(next_game_away_team_wins))
             elif next_game_home_team_wins < next_game_away_team_wins:
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_away_team_abbr + " leads " + str(next_game_away_team_wins) + '-' + str(next_game_home_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_away_team_abbr + " leads ")
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, + str(next_game_away_team_wins) + '-' + str(next_game_home_team_wins))
             else: 
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(next_game_away_team_wins) + '-' + str(next_game_home_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(next_game_home_team_wins) + '-' + str(next_game_away_team_wins))
 
             
 
@@ -246,18 +248,6 @@ class TeamsScreen(SampleBase):
             period_time = ""
         else:
             period = str(game.getPeriod())
-            if period == "0":
-                period = "P"
-            elif period == "1":
-                period = "1st"
-            elif period == "2":
-                period = "2nd"
-            elif period == "3":
-                period = "3rd"
-            elif period == "4":
-                period = "OT"
-            else:
-                period = "?"
             period_time = str(game.getPeriodTime())
 
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, WHITE, period)

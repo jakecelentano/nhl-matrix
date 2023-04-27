@@ -12,6 +12,7 @@ class NHLGame(Game):
         self.json = self.getJson() 
         self.timezone = self.getTimezone()
         self.date = self.getDate()
+        self.datetime = self.getDatetime()
 
     # example in nhl_samples/game.json
     def getJson(self):
@@ -44,7 +45,7 @@ class NHLGame(Game):
     def getPeriod(self):
         period = "N/A"
         try:
-            period = self.json['liveData']['linescore']['currentPeriod']
+            period = self.json['liveData']['linescore']['currentPeriodOrdinal']
         except:
             pass
         return period
