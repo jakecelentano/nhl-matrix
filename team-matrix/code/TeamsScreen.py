@@ -75,17 +75,12 @@ class TeamsScreen(SampleBase):
                             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                             time.sleep(8)
                 
-                # see how many seconds until the next game
-                min_seconds_until_next_game = 1800
                 for game in next_games:
-                    print("Game: " + game.getStatus() + " | " + game.getAwayTeamName() + " @ " + game.getHomeTeamName() + " | " + str(game.getPeriod()) + " | " + str(game.getPeriodTime()))
-                    seconds_until_next_game = game.getSecondsUntilNextGame()
-                    print("Seconds until start " + str(seconds_until_next_game))
-                    min_seconds_until_next_game = min(min_seconds_until_next_game, seconds_until_next_game)
-                
-                # sleep until the next game
-                print("Sleeping for " + str(abs(min_seconds_until_next_game-60)) + " seconds")
-                sleep_time = min(min_seconds_until_next_game, 3600)
+                    offscreen_canvas = self.getUpcomingGameScreenNHL(game)
+                    offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+                    time.sleep(30)
+
+
                 
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
