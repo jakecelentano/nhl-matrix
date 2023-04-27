@@ -152,7 +152,6 @@ class TeamsScreen(SampleBase):
         # if playoff, draw series record
         if game.isPlayoff():
             game_number = game.getPlayoffSeriesGameNumber()
-            print("Game number: " + str(game_number))
             # get previous games
             previous_games = team.getPreviousGames(game_number-1)
             # get the ids for the next game teams & then for each of the previous games, see which team won based on the ids, & then print the team id that won
