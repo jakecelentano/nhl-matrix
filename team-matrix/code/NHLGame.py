@@ -13,7 +13,6 @@ class NHLGame(Game):
         self.timezone = self.getTimezone()
         self.date = self.getDate()
         self.datetime = self.getDatetime()
-        self.isPlayoff = self.isPlayoff()
         self.home_series_wins = None
         self.away_series_wins = None
 
