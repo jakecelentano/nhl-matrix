@@ -61,15 +61,23 @@ class NHLTeam(Team):
         if os.path.isfile('logos/{}.png'.format(self.name)):
             return 'logos/{}.png'.format(self.name)
         else:
+            retries = 0
             url = NHL_LOGO_API_PREFIX + '/{}.svg'.format(self.id)
-            try:
-                cairosvg.svg2png(url=url, write_to='logos/{}.png'.format(self.name), output_width=100, output_height=100)
-            except:
-                print("Couldn't get logo for {}".format(self.name))
-                print(url)
-                print("Using default logo")
-                return 'logos/{}.png'.format('nhl')          
-        return 'logos/{}.png'.format(self.name)
+            while retries < 5 and not os.path.isfile('logos/{}.png'.format(self.name)):
+                try:
+                    cairosvg.svg2png(url=url, write_to='logos/{}.png'.format(self.name), output_width=100, output_height=100)
+                    return 'logos/{}.png'.format(self.name)
+                except:
+                    print(url)
+                    print("Couldn't get logo for {}".format(self.name))
+                    retries += 1
+                    time.sleep(4)
+                    print("Retrying...")
+                    
+            print("Couldn't get logo for {}".format(self.name))
+            print("Using NHL logo instead")
+            return 'logos/{}.png'.format('nhl')          
+        
     
     def getStats(self):
         self.stats = self.getData('https://statsapi.web.nhl.com/api/v1/teams/{}/stats'.format(self.id))
