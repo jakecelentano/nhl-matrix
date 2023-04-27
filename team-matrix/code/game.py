@@ -20,7 +20,7 @@ class Game:
                 json = requests.get(url, headers=self.headers).json()
             except:
                 retries += 1
-                time.sleep(10)
+                time.sleep(retries)
         
         if not json:
             raise Exception("Couldn't get data from {}".format(url))
