@@ -247,6 +247,6 @@ class TeamsScreen(SampleBase):
 
 # Main function
 if __name__ == "__main__":
-    screen = NHLScreen()
+    screen = TeamsScreen()
     if (not screen.process()):
         screen.print_help()
