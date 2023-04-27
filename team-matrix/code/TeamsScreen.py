@@ -149,22 +149,43 @@ class TeamsScreen(SampleBase):
         # draw @ time
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, WHITE, "@ " + game_time)
 
-        # draw abbrevations + win/loss record
-        home_wins = home_team.getWins()
-        home_losses = home_team.getLosses()
-        home_ot = home_team.getOT()
-        away_wins = away_team.getWins()
-        away_losses = away_team.getLosses()
-        away_ot = away_team.getOT()
-        home_primary_color = home_team.getPrimaryColor()
-        away_primary_color = away_team.getPrimaryColor()
-        home_color = graphics.Color(home_primary_color[0], home_primary_color[1], home_primary_color[2])
-        away_color = graphics.Color(away_primary_color[0], away_primary_color[1], away_primary_color[2])
-        graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.getAbbreviation() )
-        graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.getAbbreviation() )
-        # draw wins - losses - ot
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.getAbbreviation())+6, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.getAbbreviation())+6, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(away_ot))
+        # if playoff, draw series record
+        if game.isPlayoff():
+            game_number = game.getPlayoffSeriesGameNumber()
+            # get previous games
+            previous_games = team.getPreviousGames(game_number-1)
+            home_wins = 0
+            away_wins = 0
+            for previous_game in previous_games:
+                if previous_game.getHomeTeamId() == team.getId():
+                    if previous_game.getHomeScore() > previous_game.getAwayScore():
+                        home_wins += 1
+                    else:
+                        away_wins += 1
+                else:
+                    if previous_game.getAwayScore() > previous_game.getHomeScore():
+                        away_wins += 1
+                    else:
+                        home_wins += 1
+            graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.getAbbreviation())+6, y+50, WHITE, str(home_wins))
+            graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.getAbbreviation())+6, y+58, WHITE, str(away_wins))
+        else:
+            home_wins = home_team.getWins()
+            home_losses = home_team.getLosses()
+            home_ot = home_team.getOT()
+            away_wins = away_team.getWins()
+            away_losses = away_team.getLosses()
+            away_ot = away_team.getOT()
+            home_primary_color = home_team.getPrimaryColor()
+            away_primary_color = away_team.getPrimaryColor()
+            home_color = graphics.Color(home_primary_color[0], home_primary_color[1], home_primary_color[2])
+            away_color = graphics.Color(away_primary_color[0], away_primary_color[1], away_primary_color[2])
+            graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.getAbbreviation() )
+            graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.getAbbreviation() )
+            # draw wins - losses - ot
+            graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.getAbbreviation())+6, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
+            graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.getAbbreviation())+6, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(away_ot))
+        
 
 
 

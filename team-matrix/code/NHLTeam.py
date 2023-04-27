@@ -55,6 +55,18 @@ class NHLTeam(Team):
             num = len(games)
         return games[:num_games]
     
+    def getPreviousGames(self, num_games=1):
+        days = 14
+        start_date = (datetime.datetime.now() - datetime.timedelta(days=days)).strftime("%Y-%m-%d")
+        end_date = datetime.datetime.now().strftime("%Y-%m-%d")
+        games = self.getSchedule(start_date, end_date)
+        num = len(games)
+
+        # sort games by date, most recent first
+        games.sort(key=lambda x: x.date, reverse=True)
+
+        return games[:num_games]
+    
 
     def getLogo(self):
         NHL_LOGO_API_PREFIX = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light"
