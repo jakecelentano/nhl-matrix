@@ -179,13 +179,15 @@ class TeamsScreen(SampleBase):
 
     # corner
     def getLiveGameScreenNHL(self, game):
+        team = self.nhl.getTeam(game.getHomeTeamId())
+        
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")
         font2 = graphics.Font()
         font2.LoadFont("fonts/6x9.bdf")
         
-        self.drawBorder(offscreen_canvas)   
+        self.drawBorder(team, offscreen_canvas)   
         x, y = 1, 1
         home_team = self.nhl.getTeam(game.getHomeTeamId())
         away_team = self.nhl.getTeeam(game.getAwayTeamId())
