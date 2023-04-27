@@ -187,15 +187,17 @@ class TeamsScreen(SampleBase):
             # winning team is the team with the most wins
             winning_team_id = home_team_id
             winning_team_wins = home_team_wins
+            losing_team_wins = away_team_wins
             if away_team_wins > home_team_wins:
                 winning_team_id = away_team_id
                 winning_team_wins = away_team_wins
+                losing_team_wins = home_team_wins
             
             winning_team_abbreviation = self.nhl.getTeam(winning_team_id).getAbbreviation()
 
             if home_team_wins != away_team_wins:
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, winning_team_abbreviation + " leads")
-                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(home_team_wins) + "-" + str(away_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(winning_team_wins) + "-" + str(losing_team_wins))
             else: 
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(home_team_wins) + "-" + str(away_team_wins))
 
