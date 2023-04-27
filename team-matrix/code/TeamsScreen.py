@@ -99,8 +99,8 @@ class TeamsScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGameScreenNHL(self, team):
-        game = team.getNextGames(1)[0]
+    def getUpcomingGameScreenNHL(self, game):
+        team = self.nhl.getTeam(game.getHomeTeamId())
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(team, offscreen_canvas)
         font = graphics.Font()
