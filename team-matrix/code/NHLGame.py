@@ -174,7 +174,7 @@ class NHLGame(Game):
         if not self.isPlayoff():
             return 0
         # the game id takes the format of 2020020917, where first 4 digits are the year, next 2 are the type (02 = regular season, 03 = playoffs), and last 4 are the game number, last digit being the game number
-        game_number = int(self.id[-1])
+        game_number = int(str(self.id[-1]))
         return game_number
     
     def isPlayoff(self):
