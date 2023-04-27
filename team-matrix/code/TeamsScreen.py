@@ -3,95 +3,109 @@ from samplebase import SampleBase
 from rgbmatrix import graphics
 import time
 from NHL import NHL
-from NHLTeam import NHLTeam
 import datetime
-from config import DEFAULT_TEAM
+from config import NHL_TEAMS
 from PIL import Image
 
 WHITE = graphics.Color(255, 255, 255)
-
 class TeamsScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(TeamsScreen, self).__init__(*args, **kwargs)
-        #self.parser.add_argument("-t", "--team", help="The team to display", default=DEFAULT_TEAM)
         self.nhl = NHL()
-        self.team = "No team"
+        #self.nba = NBA()
+        #self.nfl = NFL()
+        #self.mlb = MLB()
+        self.teams = []
         self.color = graphics.Color(255, 255, 255)
-
 
     # main function
     def run(self):
-        #team = self.args.team
-        team = DEFAULT_TEAM
-        self.team = self.nhl.getTeam(team)
-        print("Team: " + team)
-        print("Team: " + str(self.team))
-        if self.team is None:
-            print("Team not found: " + team)
-            return
-        team_primary_color = self.team.getPrimaryColor()
-        self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
+
+        for team in NHL_TEAMS:
+            self.teams.append(self.nhl.getTeam(team))
+        #for team in NBA_TEAMS:
+        #    self.teams.append(self.nba.getTeam(team))
+        #for team in NFL_TEAMS:
+        #    self.teams.append(self.nfl.getTeam(team))
+        #for team in MLB_TEAMS:
+        #    self.teams.append(self.mlb.getTeam(team))
 
         # main loop
         sleep_time = 1
+        next_games = [] # next games
+        live_games = [] # live games or preview
+        recently_finished_games = [] # gameId & timestamp from when game ended
         while True:
             time.sleep(sleep_time)
             try:
-                # get the next game (will include games today, so live games will be included)
-                game = self.team.getNextGames(1)[0]
-                # get id of the next game
-                game_id = game.getId()
-                # check if game is live
-                status = game.getStatus()
-                homeTeam = game.getHomeTeamName()
-                awayTeam = game.getAwayTeamName()
-                try:
-                    period = game.getPeriod()
-                    period_time = game.getPeriodTime()
-                except:
-                    period = "N/A"
-                    period_time = "N/A"
-                print(str(game_id) + ": " + str(status + " | " + awayTeam + " @ " + homeTeam) + " | " + str(period) + " | " + str(period_time))
+                # get the next game for each team
+                for team in self.teams:
+                    next_games.append(team.getNextGames(1)[0])
 
-                if status == "Live" or status == "Final" or status == "In Progress":
-                    # draw the live game screen
-                    if status == "Live":
-                        sleep_time = 5
-                    elif status == "Final":
-                        sleep_time = 1800
-                    else:
-                        sleep_time = 60
-                    offscreen_canvas = self.getLiveGameScreen(game)
-                    
-                # get the next game
-                else:
-                    # get how many seconds between now and the next game
+                # check if any games are live
+                for game in next_games:
+                    if game.isLive() or game.isPreview():
+                        live_games.append(game)
+                
+                while len(live_games) > 0:
+                    for game in live_games:
+                        # cycle through live games
+                        gameId = game.getId()
+                        print(str(gameId) + ": " + str(game.getStatus() + " | " + game.getAwayTeamName() + " @ " + game.getHomeTeamName()) + " | " + str(game.getPeriod()) + " | " + str(game.getPeriodTime()))
+                        offscreen_canvas = self.getLiveGameScreenNHL(game)
+                        offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+                        time.sleep(10)
+
+                        # check if game is over
+                        if game.isOver():
+                            live_games.remove(game)
+                            recently_finished_games.append([gameId, datetime.datetime.now()])
+                            print("Game over: " + str(gameId))
+                        
+                        # show any recently finished games
+                        for finished in recently_finished_games:
+                            # remove games from recently_finished_games after 30 minutes
+                            if (datetime.datetime.now() - finished[1]).total_seconds() > 1800:
+                                recently_finished_games.remove(finished)
+                                print("Removed game: " + str(finished[0]))
+                            
+                            offscreen_canvas = self.getLiveGameScreenNHL(finished[0])
+                            offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
+                            time.sleep(8)
+                
+                # see how many seconds until the next game
+                min_seconds_until_next_game = 1800
+                for game in next_games:
+                    print("Game: " + game.getStatus() + " | " + game.getAwayTeamName() + " @ " + game.getHomeTeamName() + " | " + str(game.getPeriod()) + " | " + str(game.getPeriodTime()))
                     seconds_until_next_game = game.getSecondsUntilNextGame()
-                    print("Seconds until next game: " + str(seconds_until_next_game))
-                    offscreen_canvas = self.getUpcomingGameScreen(game)
-                    print("Drawing upcoming game screen")  
-                    sleep_time = min(abs(seconds_until_next_game-300), 3600)
-                    if seconds_until_next_game <= 300:
-                        sleep_time = 300
-
-                offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas) 
+                    print("Seconds until start " + str(seconds_until_next_game))
+                    min_seconds_until_next_game = min(min_seconds_until_next_game, seconds_until_next_game)
+                
+                # sleep until the next game
+                print("Sleeping for " + str(min_seconds_until_next_game-60) + " seconds")
+                sleep_time = min_seconds_until_next_game-3600
+                
             except KeyboardInterrupt:
                 print("Keyboard interrupt")
                 break
 
     
-    def drawBorder(self, offscreen_canvas=None):
+    def drawBorder(self, team, offscreen_canvas=None):
+        team_primary_color = team.getPrimaryColor()
+        color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
+
         if offscreen_canvas is None:
             offscreen_canvas = self.matrix.CreateFrameCanvas()
-        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, self.color)
-        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, self.color)
-        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, self.color)
-        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, self.color)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
+        graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
+        graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
+        graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGameScreen(self, game):
+    def getUpcomingGameScreenNHL(self, team):
+        game = team.getNextGames(1)[0]
         offscreen_canvas = self.matrix.CreateFrameCanvas()
-        self.drawBorder(offscreen_canvas)
+        self.drawBorder(team, offscreen_canvas)
         font = graphics.Font()
         font.LoadFont("fonts/5x8.bdf")
         font_width = 5
@@ -162,7 +176,7 @@ class TeamsScreen(SampleBase):
         return offscreen_canvas
 
     # corner
-    def getLiveGameScreen(self, game):
+    def getLiveGameScreenNHL(self, game):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")

@@ -2,7 +2,11 @@ OBSERVE_DAYLIGHT_SAVINGS = True
 STANDARD_TIMEZONE = "EST"
 DST_TIMEZONE = "EDT"
 DEFAULT_TEAM = "Boston Bruins"
-TEAMS = ["Boston Bruins"]
+NHL_TEAMS = ["Boston Bruins", "Vegas Golden Knights"]
+NBA_TEAMS = ["Boston Celtics", "Los Angeles Lakers"]
+MLB_TEAMS = ["Boston Red Sox", "Los Angeles Dodgers"]
+NFL_TEAMS = ["New England Patriots", "Los Angeles Rams"]
+
 
 DEFAULT_FONT = "fonts/4x6.bdf"
 DEFAULT_FONT_COLOR = (255, 255, 255)

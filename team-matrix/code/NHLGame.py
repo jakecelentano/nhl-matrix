@@ -25,8 +25,11 @@ class NHLGame(Game):
         return self.link
     
     
-    def is_live(self):
+    def isLive(self):
         return self.getStatus().upper() == "LIVE"
+
+    def isPreview(self):
+        return self.getStatus().upper() == "PREVIEW"
     
 
     def getHomeScore(self):
@@ -38,11 +41,20 @@ class NHLGame(Game):
         return away_score
     
     def getPeriod(self):
-        return self.json['liveData']['linescore']['currentPeriod']
+        period = "N/A"
+        try:
+            period = self.json['liveData']['linescore']['currentPeriod']
+        except:
+            pass
+        return period
     
     def getPeriodTime(self):
-        return self.json['liveData']['linescore']['currentPeriodTimeRemaining']
-
+        period_time = "N/A"
+        try:
+            self.json['liveData']['linescore']['currentPeriodTimeRemaining']
+        except:
+            pass
+        return period_time
 
     # YYYY-MM-DD HH:MM:SS as datetime object
     def getDatetime(self):
@@ -118,6 +130,12 @@ class NHLGame(Game):
             print("Error getting game status")
             print(self.json)
         return status
+    
+    def isLive(self):
+        return self.getStatus().upper() == "LIVE" or self.getStatus().upper() == "IN PROGRESS" or self.getStatus().upper() == "FINAL"
+    
+    def isOver(self):
+        return (self.getStatus().upper() == "FINAL" or self.getStatus().upper() == "FINAL/OT" or self.getStatus().upper() == "FINAL/SO")
 
     def getTeams(self):
         return self.json['teams']
