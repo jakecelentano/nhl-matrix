@@ -167,8 +167,25 @@ class TeamsScreen(SampleBase):
                         away_wins += 1
                     else:
                         home_wins += 1
-            graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.getAbbreviation())+6, y+50, WHITE, str(home_wins))
-            graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.getAbbreviation())+6, y+58, WHITE, str(away_wins))
+
+            # get abbreviation for team with most wins
+            if home_wins > away_wins:
+                winning_team = home_team.getAbbreviation()
+                winning_team_wins = home_wins
+                losing_team_wins = away_wins
+            elif home_wins < away_wins:
+                winning_team = away_team.getAbbreviation()
+                winning_team_wins = away_wins
+                losing_team_wins = home_wins
+            else:
+                winning_team = "TIED"
+                winning_team_wins = home_wins
+                losing_team_wins = away_wins
+
+            # draw series record, ex: BOS 2-1 or TIED 1-1
+            graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, winning_team + " " + str(winning_team_wins) + "-" + str(losing_team_wins))
+            
+
         else:
             home_wins = home_team.getWins()
             home_losses = home_team.getLosses()
