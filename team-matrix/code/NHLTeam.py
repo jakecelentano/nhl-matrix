@@ -41,7 +41,7 @@ class NHLTeam(Team):
                 games.append(NHLGame(game['gamePk'], game['link']))
         return games
 
-    def getNextGames(self, num_games=2):
+    def getNextGames(self, num_games=1):
         # searches 2 weeks at a time until it finds enough games
         days = 14
         start_date = datetime.datetime.now().strftime("%Y-%m-%d")
