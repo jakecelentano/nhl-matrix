@@ -24,6 +24,8 @@ class TeamsScreen(SampleBase):
         #team = self.args.team
         team = DEFAULT_TEAM
         self.team = self.nhl.getTeam(team)
+        print("Team: " + team)
+        print("Team: " + str(self.team))
         if self.team is None:
             print("Team not found: " + team)
             return

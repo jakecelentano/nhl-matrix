@@ -17,13 +17,13 @@ class NHL(League):
             teams.append(NHLTeam(team['id'], team['name'], team['abbreviation'], team['link']))
         return teams
     
-    def getTeam(self, team):
+    def getTeam(self, search):
         for team in self.teams:
-            if team.id == team:
+            if team.id == search:
                 return team
-            if team.abbreviation == team:
+            if team.abbreviation == search:
                 return team
-            if team.name == team:
+            if team.name == search:
                 return team   
         return None
     
