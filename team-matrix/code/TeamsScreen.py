@@ -163,10 +163,15 @@ class TeamsScreen(SampleBase):
             for game in previous_games:
                 home_team_id = game.getHomeTeamId()
                 away_team_id = game.getAwayTeamId()
-                if home_team_id == next_game_home_team_id or away_team_id == next_game_away_team_id:
-                    next_game_home_team_wins += 1
-                else:
-                    next_game_away_team_wins += 1
+                if home_team_id == next_game_home_team_id:
+                    if game.getHomeScore() > game.getAwayScore():
+                        next_game_home_team_wins += 1
+                
+                elif home_team_id == next_game_away_team_id:
+                    if game.getHomeScore() > game.getAwayScore():
+                        next_game_away_team_wins += 1
+                    else:
+                        next_game_home_team_wins += 1
 
             if next_game_home_team_wins > next_game_away_team_wins:
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads ")
