@@ -154,36 +154,27 @@ class TeamsScreen(SampleBase):
             game_number = game.getPlayoffSeriesGameNumber()
             # get previous games
             previous_games = team.getPreviousGames(game_number-1)
-            home_wins = 0
-            away_wins = 0
-            for previous_game in previous_games:
-                if previous_game.getHomeTeamId() == team.getId():
-                    if previous_game.getHomeScore() > previous_game.getAwayScore():
-                        home_wins += 1
-                    else:
-                        away_wins += 1
+            next_game_home_team_id = game.getHomeTeamId()
+            next_game_away_team_id = game.getAwayTeamId()
+            next_game_home_team_abbr = self.nhl.getTeam(next_game_home_team_id).getAbbreviation()
+            next_game_away_team_abbr = self.nhl.getTeam(next_game_away_team_id).getAbbreviation()
+            next_game_home_team_wins = 0
+            next_game_away_team_wins = 0
+            for game in previous_games:
+                home_team_id = game.getHomeTeamId()
+                away_team_id = game.getAwayTeamId()
+                if home_team_id == next_game_home_team_id or away_team_id == next_game_away_team_id:
+                    next_game_home_team_wins += 1
                 else:
-                    if previous_game.getAwayScore() > previous_game.getHomeScore():
-                        away_wins += 1
-                    else:
-                        home_wins += 1
+                    next_game_away_team_wins += 1
 
-            # get abbreviation for team with most wins
-            if home_wins > away_wins:
-                winning_team = home_team.getAbbreviation()
-                winning_team_wins = home_wins
-                losing_team_wins = away_wins
-            elif home_wins < away_wins:
-                winning_team = away_team.getAbbreviation()
-                winning_team_wins = away_wins
-                losing_team_wins = home_wins
-            else:
-                winning_team = "TIED"
-                winning_team_wins = home_wins
-                losing_team_wins = away_wins
+            if next_game_home_team_wins > next_game_away_team_wins:
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads " + str(next_game_home_team_wins) + '-' + str(next_game_away_team_wins))
+            elif next_game_home_team_wins < next_game_away_team_wins:
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_away_team_abbr + " leads " + str(next_game_away_team_wins) + '-' + str(next_game_home_team_wins))
+            else: 
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(next_game_away_team_wins) + '-' + str(next_game_home_team_wins))
 
-            # draw series record, ex: BOS 2-1 or TIED 1-1
-            graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, winning_team + " " + str(winning_team_wins) + "-" + str(losing_team_wins))
             
 
         else:
