@@ -35,7 +35,7 @@ class TeamsScreen(SampleBase):
         # main loop
         sleep_time = 1
         next_games = [] # next games
-        live_games = [] # live games or preview
+        live_games = [] # live games
         recently_finished_games = [] # gameId & timestamp from when game ended
         while True:
             time.sleep(sleep_time)
@@ -46,7 +46,7 @@ class TeamsScreen(SampleBase):
 
                 # check if any games are live
                 for game in next_games:
-                    if game.isLive() or game.isPreview():
+                    if game.isLive():
                         live_games.append(game)
                 
                 while len(live_games) > 0:
