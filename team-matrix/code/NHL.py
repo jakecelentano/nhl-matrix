@@ -19,7 +19,7 @@ class NHL(League):
     
     def getTeam(self, team):
         for team in self.teams:
-            if team.team_id == team:
+            if team.id == team:
                 return team
             if team.abbreviation == team:
                 return team
