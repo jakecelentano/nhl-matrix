@@ -13,7 +13,7 @@ class Game:
     def getData(self, url):
         retries = 0
         json = None
-        while retries < 1 and not json:
+        while retries < 10 and not json:
             try:
                 if SHOW_REQUESTS:
                     print(url)

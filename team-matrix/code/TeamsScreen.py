@@ -23,6 +23,8 @@ class TeamsScreen(SampleBase):
 
         for team in NHL_TEAMS:
             self.teams.append(self.nhl.getTeam(team))
+        
+        print("Teams: " + str(self.teams))
         #for team in NBA_TEAMS:
         #    self.teams.append(self.nba.getTeam(team))
         #for team in NFL_TEAMS:
