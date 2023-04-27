@@ -2,61 +2,60 @@
 from samplebase import SampleBase
 from rgbmatrix import graphics
 import time
-from nhl import NHL
-from team import Team
+from NHL import NHL
+from NHLTeam import NHLTeam
 import datetime
 from config import DEFAULT_TEAM
 from PIL import Image
 
 WHITE = graphics.Color(255, 255, 255)
 
-class NHLScreen(SampleBase):
+class TeamsScreen(SampleBase):
     def __init__(self, *args, **kwargs):
-        super(NHLScreen, self).__init__(*args, **kwargs)
-        self.parser.add_argument("-t", "--team", help="The team to display", default=DEFAULT_TEAM)
-        self.nhl = NHL(str(datetime.datetime.now().year))
+        super(TeamsScreen, self).__init__(*args, **kwargs)
+        #self.parser.add_argument("-t", "--team", help="The team to display", default=DEFAULT_TEAM)
+        self.nhl = NHL()
         self.team = "No team"
         self.color = graphics.Color(255, 255, 255)
 
 
     # main function
     def run(self):
-        # start
-        team = self.args.team
-        self.team = self.nhl.get_team_by_name(team)
+        #team = self.args.team
+        team = DEFAULT_TEAM
+        self.team = self.nhl.getTeam(team)
         if self.team is None:
             print("Team not found: " + team)
             return
-        team_primary_color = self.team.get_primary_color()
+        team_primary_color = self.team.getPrimaryColor()
         self.color = graphics.Color(team_primary_color[0], team_primary_color[1], team_primary_color[2])
 
-
-        # loop
+        # main loop
         sleep_time = 1
         while True:
             time.sleep(sleep_time)
             try:
                 # get the next game (will include games today, so live games will be included)
-                game = self.team.get_next_games(1)[0]
+                game = self.team.getNextGames(1)[0]
                 # get id of the next game
-                game_id = game.get_game_id()
+                game_id = game.getId()
                 # check if game is live
-                game_status = game.get_status()
-                game_home_team = game.get_game_home_team_name()
-                game_away_team = game.get_game_away_team_name()
+                status = game.getStatus()
+                homeTeam = game.getHomeTeamName()
+                awayTeam = game.getAwayTeamName()
                 try:
-                    period = game.get_period()
-                    period_time = game.get_period_time()
+                    period = game.getPeriod()
+                    period_time = game.getPeriodTime()
                 except:
                     period = "N/A"
                     period_time = "N/A"
-                print(str(game_id) + ": " + str(game.get_status() + " | " + game_home_team + " vs " + game_away_team) + " | " + str(period) + " | " + str(period_time))
+                print(str(game_id) + ": " + str(status + " | " + awayTeam + " @ " + homeTeam) + " | " + str(period) + " | " + str(period_time))
 
-                if game_status == "Live" or game_status == "Final" or game_status == "In Progress":
+                if status == "Live" or status == "Final" or status == "In Progress":
                     # draw the live game screen
-                    if game_status == "Live":
+                    if status == "Live":
                         sleep_time = 5
-                    elif game_status == "Final":
+                    elif status == "Final":
                         sleep_time = 1800
                     else:
                         sleep_time = 60
@@ -65,7 +64,7 @@ class NHLScreen(SampleBase):
                 # get the next game
                 else:
                     # get how many seconds between now and the next game
-                    seconds_until_next_game = game.get_seconds_until_next_game()
+                    seconds_until_next_game = game.getSecondsUntilNextGame()
                     print("Seconds until next game: " + str(seconds_until_next_game))
                     offscreen_canvas = self.getUpcomingGameScreen(game)
                     print("Drawing upcoming game screen")  
@@ -96,11 +95,11 @@ class NHLScreen(SampleBase):
         font_width = 5
         
         x, y = 2, 2
-        home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
-        away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
+        home_team = self.nhl.getTeam(game.getHomeTeamId())
+        away_team = self.nhl.getTeam(game.getAwayTeamId())
         # get logo paths
-        home_team_logo = home_team.get_logo()
-        away_team_logo = away_team.get_logo()
+        home_team_logo = home_team.getLogo()
+        away_team_logo = away_team.getLogo()
         # convert to 30x30 PIL images in RGB
         home_team_logo = Image.open(home_team_logo)
         home_team_logo.thumbnail((24, 24), Image.ANTIALIAS)
@@ -116,10 +115,10 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+27, y+16, WHITE, "@") # 27 + 5 = 32 (offset + font width = center)
         
         #YYYY-MM-DD
-        game_date =  game.get_game_date()
+        game_date =  game.getDate()
         #HH:MM AM/PM
-        game_time = game.get_game_time_pretty()
-        game_day_of_week = game.get_game_day_of_week()
+        game_time = game.getTimePretty()
+        game_day_of_week = game.getDayOfWeek()
         current_date = self.getCurrentDate() # YYYY-MM-DD
         if game_date == current_date:
             game_day_of_week = "Today"
@@ -138,21 +137,21 @@ class NHLScreen(SampleBase):
         graphics.DrawText(offscreen_canvas, font, x+2, y+40, WHITE, "@ " + game_time)
 
         # draw abbrevations + win/loss record
-        home_wins = home_team.get_wins()
-        home_losses = home_team.get_losses()
-        home_ot = home_team.get_ot()
-        away_wins = away_team.get_wins()
-        away_losses = away_team.get_losses()
-        away_ot = away_team.get_ot()
-        home_primary_color = home_team.get_primary_color()
-        away_primary_color = away_team.get_primary_color()
+        home_wins = home_team.getWins()
+        home_losses = home_team.getLosses()
+        home_ot = home_team.getOT()
+        away_wins = away_team.getWins()
+        away_losses = away_team.getLosses()
+        away_ot = away_team.getOT()
+        home_primary_color = home_team.getPrimaryColor()
+        away_primary_color = away_team.getPrimaryColor()
         home_color = graphics.Color(home_primary_color[0], home_primary_color[1], home_primary_color[2])
         away_color = graphics.Color(away_primary_color[0], away_primary_color[1], away_primary_color[2])
-        graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.get_abbreviation() )
-        graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.get_abbreviation() )
+        graphics.DrawText(offscreen_canvas, font, x+2, y+50, home_color, home_team.getAbbreviation() )
+        graphics.DrawText(offscreen_canvas, font, x+2, y+58, away_color, away_team.getAbbreviation() )
         # draw wins - losses - ot
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.get_abbreviation())+6, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
-        graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.get_abbreviation())+6, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(away_ot))
+        graphics.DrawText(offscreen_canvas, font, x+font_width*len(home_team.getAbbreviation())+6, y+50, WHITE, str(home_wins) + "-" + str(home_losses) + "-" + str(home_ot))
+        graphics.DrawText(offscreen_canvas, font, x+font_width*len(away_team.getAbbreviation())+6, y+58, WHITE, str(away_wins) + "-" + str(away_losses) + "-" + str(away_ot))
 
 
 
@@ -170,16 +169,16 @@ class NHLScreen(SampleBase):
         
         self.drawBorder(offscreen_canvas)   
         x, y = 1, 1
-        home_team = self.nhl.get_team_by_id(game.get_game_home_team_id())
-        away_team = self.nhl.get_team_by_id(game.get_game_away_team_id())
+        home_team = self.nhl.getTeam(game.getHomeTeamId())
+        away_team = self.nhl.getTeeam(game.getAwayTeamId())
 
         LOGO_SIZE = 24
-        home_team_logo = home_team.get_logo()
+        home_team_logo = home_team.getLogo()
         home_team_logo = Image.open(home_team_logo)
         home_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         home_team_logo = home_team_logo.convert('RGB')
 
-        away_team_logo = away_team.get_logo()
+        away_team_logo = away_team.getLogo()
         away_team_logo = Image.open(away_team_logo)
         away_team_logo.thumbnail((LOGO_SIZE, LOGO_SIZE), Image.ANTIALIAS)
         away_team_logo = away_team_logo.convert('RGB')
@@ -189,20 +188,20 @@ class NHLScreen(SampleBase):
         offscreen_canvas.SetImage(away_team_logo, x+1, y)
 
         # write score
-        home_score = game.get_home_score()
-        away_score = game.get_away_score()
+        home_score = game.getHomeScore()
+        away_score = game.getAwayScore()
         graphics.DrawText(offscreen_canvas, font1, x+36, y+22, WHITE, str(away_score))
         graphics.DrawText(offscreen_canvas, font1, x+36, y+46, WHITE, str(home_score))
 
         # write period and time
-        if game.get_status() == "Final":
+        if game.getStatus() == "Final":
             period = "FINAL"
             period_time = ""
-        elif game.get_status() == "Final/OT":
+        elif game.getStatus() == "Final/OT":
             period = "FINAL OT"
             period_time = ""
         else:
-            period = str(game.get_period())
+            period = str(game.getPeriod())
             if period == "0":
                 period = "P"
             elif period == "1":
@@ -215,7 +214,7 @@ class NHLScreen(SampleBase):
                 period = "OT"
             else:
                 period = "?"
-            period_time = str(game.get_period_time())
+            period_time = str(game.getPeriodTime())
 
         graphics.DrawText(offscreen_canvas, font2, x+1, LOGO_SIZE*2 + 10, WHITE, period)
         graphics.DrawText(offscreen_canvas, font2, x+30, LOGO_SIZE*2 + 10, WHITE, period_time)

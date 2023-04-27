@@ -1,37 +1,38 @@
 import requests
-from team import Team
-from game import Game
+from NHLTeam import NHLTeam
+from NHLGame import NHLGame
+from league import League
 import json
 
 
-class NHL(object):
-    def __init__(self, year):
-        self.year = year
-        self.teams = self.get_teams()
-
-    def get_teams(self):
+class NHL(League):
+    def __init__(self, name="NHL"):
+        super().__init__(name, "Hockey")
+        self.teams = self.getTeams()
+    
+    def getTeams(self):
         teams = []
-        teams_json = requests.get('https://statsapi.web.nhl.com/api/v1/teams').json()
+        teams_json = self.getData('https://statsapi.web.nhl.com/api/v1/teams')
         for team in teams_json['teams']:
-            teams.append(Team(team['id'], team['name'], team['abbreviation'], team['link']))
+            teams.append(NHLTeam(team['id'], team['name'], team['abbreviation'], team['link']))
         return teams
-
-    def get_team_by_name(self, name):
+    
+    def getTeam(self, team):
         for team in self.teams:
-            if team.team_name == name:
+            if team.team_id == team:
                 return team
-
-    def get_team_by_id(self, team_id):
-        for team in self.teams:
-            if team.team_id == team_id:
+            if team.abbreviation == team:
                 return team
-
-    def get_schedule(self, start_date, end_date):
+            if team.name == team:
+                return team   
+        return None
+    
+    def getSchedule(self, start_date, end_date):
         games = []
-        schedule_json = requests.get('https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}'.format(start_date, end_date)).json()
-
+        schedule_json = self.getData('https://statsapi.web.nhl.com/api/v1/schedule?startDate={}&endDate={}'.format(start_date, end_date))
         for date in schedule_json['dates']:
             for game in date['games']:
-                games.append(Game(game['gamePk'], game['link']))
+                games.append(NHLGame(game['gamePk'], game['link']))
         return games
     
+
