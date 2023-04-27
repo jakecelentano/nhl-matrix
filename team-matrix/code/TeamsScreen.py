@@ -175,7 +175,7 @@ class TeamsScreen(SampleBase):
 
             if next_game_home_team_wins > next_game_away_team_wins:
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_home_team_abbr + " leads ")
-                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, + str(next_game_home_team_wins) + "-" + str(next_game_away_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(next_game_home_team_wins) + "-" + str(next_game_away_team_wins))
             elif next_game_home_team_wins < next_game_away_team_wins:
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, next_game_away_team_abbr + " leads ")
                 graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(next_game_away_team_wins) + "-" + str(next_game_home_team_wins))
