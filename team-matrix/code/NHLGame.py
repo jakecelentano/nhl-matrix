@@ -18,7 +18,11 @@ class NHLGame(Game):
 
     # example in nhl_samples/game.json
     def getJson(self):
-        return self.getData(self.link)  
+        self.json = self.getData(self.link)  
+        return self.json
+    
+    def update(self):
+        self.json = self.getData(self.link)
 
     # ex: 2022020917
     def getId(self):

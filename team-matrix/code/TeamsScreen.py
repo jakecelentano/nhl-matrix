@@ -53,6 +53,7 @@ class TeamsScreen(SampleBase):
                     for game in live_games:
                         # cycle through live games
                         gameId = game.getId()
+                        game.update()
                         print(str(gameId) + ": " + str(game.getStatus() + " | " + game.getAwayTeamName() + " @ " + game.getHomeTeamName()) + " | " + str(game.getPeriod()) + " | " + str(game.getPeriodTime()))
                         offscreen_canvas = self.getLiveGameScreenNHL(game)
                         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
