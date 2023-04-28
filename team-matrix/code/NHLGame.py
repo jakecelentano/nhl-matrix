@@ -53,9 +53,9 @@ class NHLGame(Game):
         return period
     
     def getPeriodTime(self):
-        period_time = "END"
+        period_time = "N/A"
         try:
-            self.json['liveData']['linescore']['currentPeriodTimeRemaining']
+            period_time = self.json['liveData']['linescore']['currentPeriodTimeRemaining']
         except:
             pass
         return period_time
