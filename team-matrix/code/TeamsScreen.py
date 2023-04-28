@@ -62,7 +62,7 @@ class TeamsScreen(SampleBase):
                         # check if game is over
                         if game.isOver():
                             live_games.remove(game)
-                            recently_finished_games.append([gameId, datetime.datetime.now()])
+                            recently_finished_games.append([game, datetime.datetime.now()])
                             print("Game over: " + str(gameId))
                         
                         # show any recently finished games
