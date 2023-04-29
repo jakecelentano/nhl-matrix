@@ -42,7 +42,10 @@ class TeamsScreen(SampleBase):
             try:
                 # get the next game for each team
                 for team in self.teams:
-                    next_games.append(team.getNextGames()[0])
+                    try:
+                        next_games.append(team.getNextGames()[0])
+                    except:
+                        pass
 
                 # check if any games are live
                 for game in next_games:
