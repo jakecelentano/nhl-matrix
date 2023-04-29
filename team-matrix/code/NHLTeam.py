@@ -48,7 +48,7 @@ class NHLTeam(Team):
         end_date = (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d")
         games = self.getSchedule(start_date, end_date)
         num = len(games)
-        while num < num_games:
+        while num < num_games and days < 60:
             days += 14
             end_date = (datetime.datetime.now() + datetime.timedelta(days=days)).strftime("%Y-%m-%d")
             games = self.getSchedule(start_date, end_date)
@@ -66,7 +66,7 @@ class NHLTeam(Team):
         games.sort(key=lambda x: x.date, reverse=True)
         # only return games that have been played
         games = [game for game in games if game.datetime < datetime.datetime.now()]
-        while num < num_games:
+        while num < num_games and days < 60:
             days += 14
             start_date = (datetime.datetime.now() - datetime.timedelta(days=days)).strftime("%Y-%m-%d")
             games = self.getSchedule(start_date, end_date)
