@@ -202,7 +202,8 @@ class TeamsScreen(SampleBase):
                 graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, winning_team_abbreviation + " leads")
                 graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(winning_team_wins) + "-" + str(losing_team_wins))
             else: 
-                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied " + str(home_team_wins) + "-" + str(away_team_wins))
+                graphics.DrawText(offscreen_canvas, font, x+2, y+50, WHITE, "Series tied")
+                graphics.DrawText(offscreen_canvas, font, x+2, y+58, WHITE, str(winning_team_wins) + "-" + str(losing_team_wins))
 
             
         # if not playoff, draw record
