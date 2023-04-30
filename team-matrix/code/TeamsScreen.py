@@ -100,6 +100,9 @@ class TeamsScreen(SampleBase):
 
         if offscreen_canvas is None:
             offscreen_canvas = self.matrix.CreateFrameCanvas()
+        
+        offscreen_canvas.Clear()
+
         graphics.DrawLine(offscreen_canvas, 0, 0, 63, 0, color)
         graphics.DrawLine(offscreen_canvas, 0, 0, 0, 63, color)
         graphics.DrawLine(offscreen_canvas, 63, 0, 63, 63, color)
@@ -107,6 +110,7 @@ class TeamsScreen(SampleBase):
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
     def getUpcomingGameScreenNHL(self, game, offscreen_canvas):
+        offscreen_canvas.Clear()
         team = self.nhl.getTeam(game.getHomeTeamId())
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(team, offscreen_canvas)
@@ -236,6 +240,7 @@ class TeamsScreen(SampleBase):
 
     # corner
     def getLiveGameScreenNHL(self, game, offscreen_canvas):
+        offscreen_canvas.Clear()
         team = self.nhl.getTeam(game.getHomeTeamId())
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")
