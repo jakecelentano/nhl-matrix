@@ -59,7 +59,8 @@ class Team:
                 time.sleep(retries)
         
         if not json:
-            raise Exception("Couldn't get data from {}".format(url))
+            print("Couldn't get data from {}".format(url))
+            return None
         
         return json
     

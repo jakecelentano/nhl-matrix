@@ -8,6 +8,7 @@ from config import NHL_TEAMS
 from PIL import Image
 
 WHITE = graphics.Color(255, 255, 255)
+
 class TeamsScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(TeamsScreen, self).__init__(*args, **kwargs)
@@ -17,6 +18,7 @@ class TeamsScreen(SampleBase):
         #self.mlb = MLB()
         self.teams = []
         self.color = graphics.Color(255, 255, 255)
+        
 
     # main function
     def run(self):
@@ -37,6 +39,7 @@ class TeamsScreen(SampleBase):
         next_games = [] # next games
         live_games = [] # live games
         recently_finished_games = [] # gameId & timestamp from when game ended
+        offscreen_canvas = self.matrix.CreateFrameCanvas()
         while True:
             time.sleep(sleep_time)
             try:
@@ -58,7 +61,7 @@ class TeamsScreen(SampleBase):
                         gameId = game.getId()
                         game.update()
                         print(str(gameId) + ": " + str(game.getStatus() + " | " + game.getAwayTeamName() + " @ " + game.getHomeTeamName()) + " | " + str(game.getPeriod()) + " | " + str(game.getPeriodTime()))
-                        offscreen_canvas = self.getLiveGameScreenNHL(game)
+                        offscreen_canvas = self.getLiveGameScreenNHL(game, offscreen_canvas)
                         offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                         time.sleep(10)
 
@@ -75,12 +78,12 @@ class TeamsScreen(SampleBase):
                                 recently_finished_games.remove(finished)
                                 print("Removed game: " + str(finished[0]))
                             
-                            offscreen_canvas = self.getLiveGameScreenNHL(finished[0])
+                            offscreen_canvas = self.getLiveGameScreenNHL(finished[0], offscreen_canvas)
                             offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                             time.sleep(8)
                 
                 for game in next_games:
-                    offscreen_canvas = self.getUpcomingGameScreenNHL(game)
+                    offscreen_canvas = self.getUpcomingGameScreenNHL(game, offscreen_canvas)
                     offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
                     time.sleep(30)
 
@@ -103,7 +106,7 @@ class TeamsScreen(SampleBase):
         graphics.DrawLine(offscreen_canvas, 0, 63, 63, 63, color)
         #offscreen_canvas = self.matrix.SwapOnVSync(offscreen_canvas)
 
-    def getUpcomingGameScreenNHL(self, game):
+    def getUpcomingGameScreenNHL(self, game, offscreen_canvas):
         team = self.nhl.getTeam(game.getHomeTeamId())
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         self.drawBorder(team, offscreen_canvas)
@@ -232,10 +235,8 @@ class TeamsScreen(SampleBase):
         return offscreen_canvas
 
     # corner
-    def getLiveGameScreenNHL(self, game):
+    def getLiveGameScreenNHL(self, game, offscreen_canvas):
         team = self.nhl.getTeam(game.getHomeTeamId())
-
-        offscreen_canvas = self.matrix.CreateFrameCanvas()
         font1 = graphics.Font()
         font1.LoadFont("fonts/texgyre-27.bdf")
         font2 = graphics.Font()
