@@ -1,0 +1,267 @@
+{
+	"copyright": "NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. NHL 2023. All Rights Reserved.",
+	"gamePk": 2022020917,
+	"link": "/api/v1/game/2022020917/feed/live",
+	"metaData": {
+		"wait": 10,
+		"timeStamp": "20230222_180909"
+	},
+	"gameData": {
+		"game": {
+			"pk": 2022020917,
+			"season": "20222023",
+			"type": "R"
+		},
+		"datetime": {
+			"dateTime": "2023-02-23T00:00:00Z"
+		},
+		"status": {
+			"abstractGameState": "Preview",
+			"codedGameState": "1",
+			"detailedState": "Scheduled",
+			"statusCode": "1",
+			"startTimeTBD": "False"
+		},
+		"teams": {
+			"away": {
+				"id": 52,
+				"name": "Winnipeg Jets",
+				"link": "/api/v1/teams/52",
+				"venue": {
+					"id": 5058,
+					"name": "Canada Life Centre",
+					"link": "/api/v1/venues/5058",
+					"city": "Winnipeg",
+					"timeZone": {
+						"id": "America/Winnipeg",
+						"offset": -6,
+						"tz": "CST"
+					}
+				},
+				"abbreviation": "WPG",
+				"triCode": "WPG",
+				"teamName": "Jets",
+				"locationName": "Winnipeg",
+				"firstYearOfPlay": "2011",
+				"division": {
+					"id": 16,
+					"name": "Central",
+					"nameShort": "CEN",
+					"link": "/api/v1/divisions/16",
+					"abbreviation": "C"
+				},
+				"conference": {
+					"id": 5,
+					"name": "Western",
+					"link": "/api/v1/conferences/5"
+				},
+				"franchise": {
+					"franchiseId": 35,
+					"teamName": "Jets",
+					"link": "/api/v1/franchises/35"
+				},
+				"shortName": "Winnipeg",
+				"officialSiteUrl": "http://winnipegjets.com/",
+				"franchiseId": 35,
+				"active": "True"
+			},
+			"home": {
+				"id": 2,
+				"name": "New York Islanders",
+				"link": "/api/v1/teams/2",
+				"venue": {
+					"name": "UBS Arena",
+					"link": "/api/v1/venues/null",
+					"city": "Elmont",
+					"timeZone": {
+						"id": "America/New_York",
+						"offset": -5,
+						"tz": "EST"
+					}
+				},
+				"abbreviation": "NYI",
+				"triCode": "NYI",
+				"teamName": "Islanders",
+				"locationName": "New York",
+				"firstYearOfPlay": "1972",
+				"division": {
+					"id": 18,
+					"name": "Metropolitan",
+					"nameShort": "Metro",
+					"link": "/api/v1/divisions/18",
+					"abbreviation": "M"
+				},
+				"conference": {
+					"id": 6,
+					"name": "Eastern",
+					"link": "/api/v1/conferences/6"
+				},
+				"franchise": {
+					"franchiseId": 22,
+					"teamName": "Islanders",
+					"link": "/api/v1/franchises/22"
+				},
+				"shortName": "NY Islanders",
+				"officialSiteUrl": "http://www.newyorkislanders.com/",
+				"franchiseId": 22,
+				"active": "True"
+			}
+		},
+		"players": {},
+		"venue": {
+			"name": "UBS Arena",
+			"link": "/api/v1/venues/null"
+		}
+	},
+	"liveData": {
+		"plays": {
+			"allPlays": [],
+			"scoringPlays": [],
+			"penaltyPlays": [],
+			"playsByPeriod": []
+		},
+		"linescore": {
+			"currentPeriod": 0,
+			"periods": [],
+			"shootoutInfo": {
+				"away": {
+					"scores": 0,
+					"attempts": 0
+				},
+				"home": {
+					"scores": 0,
+					"attempts": 0
+				}
+			},
+			"teams": {
+				"home": {
+					"team": {
+						"id": 2,
+						"name": "New York Islanders",
+						"link": "/api/v1/teams/2",
+						"abbreviation": "NYI",
+						"triCode": "NYI"
+					},
+					"goals": 0,
+					"shotsOnGoal": 0,
+					"goaliePulled": "False",
+					"numSkaters": -1,
+					"powerPlay": "False"
+				},
+				"away": {
+					"team": {
+						"id": 52,
+						"name": "Winnipeg Jets",
+						"link": "/api/v1/teams/52",
+						"abbreviation": "WPG",
+						"triCode": "WPG"
+					},
+					"goals": 0,
+					"shotsOnGoal": 0,
+					"goaliePulled": "False",
+					"numSkaters": -1,
+					"powerPlay": "False"
+				}
+			},
+			"powerPlayStrength": "Even",
+			"hasShootout": "False",
+			"intermissionInfo": {
+				"intermissionTimeRemaining": 0,
+				"intermissionTimeElapsed": 0,
+				"inIntermission": "False"
+			}
+		},
+		"boxscore": {
+			"teams": {
+				"away": {
+					"team": {
+						"id": 52,
+						"name": "Winnipeg Jets",
+						"link": "/api/v1/teams/52",
+						"abbreviation": "WPG",
+						"triCode": "WPG"
+					},
+					"teamStats": {
+						"teamSkaterStats": {
+							"goals": 0,
+							"pim": 0,
+							"shots": 0,
+							"powerPlayPercentage": "0.0",
+							"powerPlayGoals": 0.0,
+							"powerPlayOpportunities": 0.0,
+							"faceOffWinPercentage": "0.0",
+							"blocked": 0,
+							"takeaways": 0,
+							"giveaways": 0,
+							"hits": 0
+						}
+					},
+					"players": {},
+					"goalies": [],
+					"skaters": [],
+					"onIce": [],
+					"onIcePlus": [],
+					"scratches": [],
+					"penaltyBox": [],
+					"coaches": [{
+						"person": {
+							"fullName": "Rick Bowness",
+							"link": "/api/v1/people/null"
+						},
+						"position": {
+							"code": "HC",
+							"name": "Head Coach",
+							"type": "Head Coach",
+							"abbreviation": "Head Coach"
+						}
+					}]
+				},
+				"home": {
+					"team": {
+						"id": 2,
+						"name": "New York Islanders",
+						"link": "/api/v1/teams/2",
+						"abbreviation": "NYI",
+						"triCode": "NYI"
+					},
+					"teamStats": {
+						"teamSkaterStats": {
+							"goals": 0,
+							"pim": 0,
+							"shots": 0,
+							"powerPlayPercentage": "0.0",
+							"powerPlayGoals": 0.0,
+							"powerPlayOpportunities": 0.0,
+							"faceOffWinPercentage": "0.0",
+							"blocked": 0,
+							"takeaways": 0,
+							"giveaways": 0,
+							"hits": 0
+						}
+					},
+					"players": {},
+					"goalies": [],
+					"skaters": [],
+					"onIce": [],
+					"onIcePlus": [],
+					"scratches": [],
+					"penaltyBox": [],
+					"coaches": [{
+						"person": {
+							"fullName": "Lane Lambert",
+							"link": "/api/v1/people/null"
+						},
+						"position": {
+							"code": "HC",
+							"name": "Head Coach",
+							"type": "Head Coach",
+							"abbreviation": "Head Coach"
+						}
+					}]
+				}
+			},
+			"officials": []
+		},
+		"decisions": {}
+	}
+}
