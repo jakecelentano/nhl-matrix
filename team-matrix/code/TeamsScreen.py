@@ -3,6 +3,7 @@ from samplebase import SampleBase
 from rgbmatrix import graphics
 import time
 from NHL import NHL
+from NBA import NBA
 import datetime
 from config import NHL_TEAMS
 from PIL import Image
@@ -13,7 +14,7 @@ class TeamsScreen(SampleBase):
     def __init__(self, *args, **kwargs):
         super(TeamsScreen, self).__init__(*args, **kwargs)
         self.nhl = NHL()
-        #self.nba = NBA()
+        self.nba = NBA()
         #self.nfl = NFL()
         #self.mlb = MLB()
         self.teams = []
@@ -305,12 +306,6 @@ class TeamsScreen(SampleBase):
         
         return str(year) + "-" + str(month) + "-" + str(day)
     
-
-        
-        
-
-
-
 
 
 # Main function
